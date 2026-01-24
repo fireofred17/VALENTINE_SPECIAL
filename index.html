@@ -139,6 +139,13 @@
     const fill = document.getElementById('fill');
     const heart = document.getElementById('heartUI');
 
+    // These emojis will fly out when the bubble is clicked
+    const reasons = [
+        {t:'Eyes', e:'👀'}, {t:'Smile', e:'😊'}, {t:'Laugh', e:'😂'}, 
+        {t:'Vibe', e:'✨'}, {t:'Soul', e:'🤍'}, {t:'Voice', e:'🎙️'}, 
+        {t:'Care', e:'🫂'}, {t:'Patience', e:'😇'}
+    ];
+
     function startJourney() { 
         song.volume = 1.0;
         song.play().catch(e => {
@@ -151,31 +158,65 @@
         slides[idx].classList.remove('active');
         idx += dir;
         slides[idx].classList.add('active');
-        // Now spans 8 slides total
         document.getElementById('navbar').style.display = (idx > 0 && idx < 7) ? 'flex' : 'none';
         fill.style.height = (idx / 7 * 100) + '%';
         if(idx === 6) initBubbles(); 
     }
 
-    function pop(tit, txt) { document.getElementById('p-tit').innerText = tit; document.getElementById('p-txt').innerText = txt; document.getElementById('ov').style.display='flex'; }
-    function openLetter() { pop('The 26 March Note 💌', "Hi, I'm leaving Kota today... miss you already. (Check full letter in repo)"); }
-    function dodge() { const b = document.getElementById('no'); b.style.position = 'fixed'; b.style.left = Math.random()*70+15+'%'; b.style.top = Math.random()*70+15+'%'; }
+    function pop(tit, txt) { 
+        document.getElementById('p-tit').innerText = tit; 
+        document.getElementById('p-txt').innerText = txt; 
+        document.getElementById('ov').style.display='flex'; 
+    }
 
-    const reasons = [{t:'Eyes', e:'👀'}, {t:'Smile', e:'😊'}, {t:'Laugh', e:'😂'}, {t:'Vibe', e:'✨'}, {t:'Soul', e:'🤍'}, {t:'Voice', e:'🎙️'}, {t:'Care', e:'🫂'}, {t:'Patience', e:'😇'}];
-    
+    function openLetter() { 
+        pop('The 26 March Note 💌', "Hi, I'm leaving Kota today... (The full text you have in your letter slide)"); 
+    }
+
+    function dodge() { 
+        const b = document.getElementById('no'); 
+        b.style.position = 'fixed'; 
+        b.style.left = Math.random()*70+15+'%'; 
+        b.style.top = Math.random()*70+15+'%'; 
+    }
+
     function initBubbles() {
         const con = document.getElementById('bubbleGame'); 
         con.innerHTML = '';
-        reasons.forEach((r, i) => {
+        reasons.forEach((r) => {
             const b = document.createElement('div'); 
             b.className = 'bubble-item'; 
             b.innerText = r.t;
-            b.style.left = Math.random()*70+5 + '%';
-            b.style.top = Math.random()*70+5 + '%';
+            b.style.left = Math.random()*70+10 + '%';
+            b.style.top = Math.random()*70+10 + '%';
             b.style.animation = `floatB ${3+Math.random()*3}s infinite alternate ease-in-out`;
+            
             b.onclick = (e) => {
-                b.remove(); 
-                if(!document.querySelector('.bubble-item')) pop('Every Single Part! ❤️', 'I love every little thing about you.'); 
+                const emo = document.createElement('div');
+                emo.style.position = 'fixed';
+                emo.style.left = e.clientX + 'px';
+                emo.style.top = e.clientY + 'px';
+                emo.style.fontSize = '2.5rem';
+                emo.style.pointerEvents = 'none';
+                emo.style.zIndex = '9000';
+                emo.innerText = r.e;
+                document.body.appendChild(emo);
+
+                emo.animate([
+                    { transform: 'translate(-50%, -50%) scale(1)', opacity: 1 },
+                    { transform: 'translate(-50%, -150px) scale(2)', opacity: 0 }
+                ], { duration: 1000, easing: 'ease-out' });
+
+                b.style.transform = 'scale(0)';
+                b.style.opacity = '0';
+                
+                setTimeout(() => { 
+                    b.remove(); 
+                    emo.remove();
+                    if(!document.querySelector('.bubble-item')) {
+                        pop('Every Single Part! ❤️', 'I love every little thing about you.'); 
+                    }
+                }, 400);
             };
             con.appendChild(b);
         });
@@ -196,21 +237,6 @@
         }, 300);
     }
 
-    function updateTimer() {
-        const diff = new Date('February 23, 2026') - new Date();
-        const d = Math.floor(diff/(1000*60*60*24)), h = Math.floor((diff/(1000*60*60))%24), m = Math.floor((diff/1000/60)%60), s = Math.floor((diff/1000)%60);
-        document.getElementById('timer').innerText = `${d}h ${h}m ${s}s`;
-    }
-    setInterval(updateTimer, 1000);
-
-    function createBGHeart() {
-        const h = document.createElement('div'); h.innerHTML = '❤️'; h.style.position='absolute';
-        h.style.left = Math.random()*100+'vw'; h.style.bottom = '-20px'; h.style.opacity = Math.random()*0.2;
-        h.style.transition = (Math.random()*5+5)+'s linear'; document.getElementById('bgHearts').appendChild(h);
-        setTimeout(() => { h.style.bottom = '100vh'; setTimeout(()=>h.remove(), 6000); }, 100);
-    }
-    setInterval(createBGHeart, 800);
-
     function rain() {
         for(let i=0; i<85; i++) {
             setTimeout(() => {
@@ -221,6 +247,20 @@
             }, i * 40);
         }
     }
+
+    function updateTimer() {
+        const diff = new Date('February 23, 2026') - new Date();
+        const d = Math.floor(diff/(1000*60*60*24)), h = Math.floor((diff/(1000*60*60))%24), m = Math.floor((diff/1000/60)%60), s = Math.floor((diff/1000)%60);
+        document.getElementById('timer').innerText = `${d}d ${h}h ${m}m ${s}s`;
+    }
+    setInterval(updateTimer, 1000);
+
+    setInterval(() => {
+        const h = document.createElement('div'); h.innerHTML = '❤️'; h.style.position='absolute';
+        h.style.left = Math.random()*100+'vw'; h.style.bottom = '-20px'; h.style.opacity = Math.random()*0.2;
+        h.style.transition = (Math.random()*5+5)+'s linear'; document.getElementById('bgHearts').appendChild(h);
+        setTimeout(() => { h.style.bottom = '100vh'; setTimeout(()=>h.remove(), 6000); }, 100);
+    }, 800);
 </script>
 </body>
 </html>
