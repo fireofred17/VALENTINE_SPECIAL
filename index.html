@@ -9,38 +9,33 @@
         :root { --primary: #ffffff; --accent: #ff4d6d; --bg: #1a0a0d; }
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
         body { height: 100vh; width: 100vw; overflow: hidden; font-family: 'Poppins', sans-serif; background: #1a0a0d; color: var(--primary); }
-
         .bg-layer { position: fixed; inset: 0; background: linear-gradient(135deg, #1a0a0d, #4a001e, #8a0038); background-size: 400% 400%; animation: grad 15s ease infinite; z-index: -2; }
         @keyframes grad { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
         .floating-hearts-bg { position: fixed; inset: 0; pointer-events: none; z-index: -1; }
-
         .heart-container { position: fixed; top: 20px; right: 20px; width: 35px; height: 32px; z-index: 2000; transition: all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55); }
         .h-shape { width: 100%; height: 100%; background: rgba(255,255,255,0.2); clip-path: path('M17.5 5C14 -2 0 -2 0 9C0 16 17.5 28 17.5 28C17.5 28 35 16 35 9C35 -2 21 -2 17.5 5Z'); }
         .h-fill { position: absolute; bottom: 0; width: 100%; height: 0%; background: white; transition: height 0.5s; }
-
-        .slide { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px; text-align: center; opacity: 0; visibility: hidden; transition: 0.6s ease; }
+        .slide { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; text-align: center; opacity: 0; visibility: hidden; transition: 0.6s ease; }
         .slide.active { opacity: 1; visibility: visible; }
-
-        .bubble-container { position: relative; width: 100%; height: 400px; margin-top: 10px; }
-        .bubble-item { position: absolute; background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.1) 40%, rgba(255, 182, 193, 0.3) 60%); border: 1px solid rgba(255, 255, 255, 0.4); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; width: 85px; height: 85px; backdrop-filter: blur(2px); cursor: pointer; }
-        @keyframes floatB { 0%, 100% { transform: translate(0,0); } 33% { transform: translate(15px, -25px); } 66% { transform: translate(-15px, -15px); } }
-
         .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 100%; max-width: 330px; }
-        .card { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); padding: 15px; border-radius: 18px; height: 130px; display: flex; flex-direction: column; align-items: center; justify-content: center; backdrop-filter: blur(8px); cursor: pointer; }
-
-        /* THE 4 PHOTO GALLERY LAYOUT */
-        .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; perspective: 1000px; width: 100%; max-width: 300px; }
-        .polaroid { background: white; padding: 5px 5px 20px 5px; box-shadow: 0 10px 20px rgba(0,0,0,0.4); transform: rotate(var(--r)); }
-        .polaroid img { width: 100%; height: 110px; object-fit: cover; }
+        .card { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); padding: 15px; border-radius: 18px; height: 120px; display: flex; flex-direction: column; align-items: center; justify-content: center; backdrop-filter: blur(8px); cursor: pointer; }
+        
+        /* ENHANCED POLAROID FRAMES */
+        .gallery-split { display: flex; flex-direction: column; gap: 20px; align-items: center; width: 100%; }
+        .polaroid-big { background: white; padding: 10px 10px 35px 10px; width: 200px; box-shadow: 0 15px 35px rgba(0,0,0,0.5); transform: rotate(var(--r)); transition: transform 0.3s; }
+        .polaroid-big img { width: 100%; height: 180px; object-fit: cover; }
+        .quote { font-family: 'Playfair Display'; color: #8a0038; font-size: 0.75rem; margin-top: 10px; font-weight: 700; font-style: italic; }
 
         .btn { padding: 14px 30px; border-radius: 50px; border: none; font-weight: 600; background: white; color: #8a0038; cursor:pointer; }
-        .nav-btn { background: rgba(255,255,255,0.1); color: white; border: 1px solid white; padding: 10px 25px; border-radius: 30px; }
+        .nav-btn { background: rgba(255,255,255,0.1); color: white; border: 1px solid white; padding: 10px 25px; border-radius: 30px; cursor:pointer; }
         #final-screen { position: fixed; inset: 0; display: none; flex-direction: column; align-items: center; justify-content: center; z-index: 8000; background: radial-gradient(circle, #ff4d6d, #8a0038, #1a0a0d); opacity: 0; transition: opacity 1.5s ease; text-align: center; }
         .heart-mid { top: 50% !important; right: 50% !important; transform: translate(50%, -50%) scale(4) !important; }
         .heart-explode { transform: translate(50%, -50%) scale(60) !important; opacity: 0; transition: transform 1.2s ease-in, opacity 0.8s ease-in !important; }
-        
         .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(12px); display: none; align-items: center; justify-content: center; z-index: 6000; padding: 25px; }
         .popup { background: white; color: #333; padding: 30px; border-radius: 25px; width: 100%; max-width: 350px; }
+        .bubble-container { position: relative; width: 100%; height: 350px; }
+        .bubble-item { position: absolute; background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.1) 40%); border: 1px solid rgba(255, 255, 255, 0.4); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; width: 80px; height: 80px; backdrop-filter: blur(2px); cursor: pointer; }
+        @keyframes floatB { 0%, 100% { transform: translate(0,0); } 33% { transform: translate(15px, -20px); } 66% { transform: translate(-10px, -10px); } }
     </style>
 </head>
 <body>
@@ -70,12 +65,15 @@
 </div>
 
 <div class="slide">
-    <h2 style="font-family:'Playfair Display'; margin-bottom: 20px;">Moments 📸</h2>
-    <div class="gallery">
-        <div class="polaroid" style="--r:-5deg;"><img src="photo-1.jpg"></div>
-        <div class="polaroid" style="--r:3deg;"><img src="photo-2.jpg"></div>
-        <div class="polaroid" style="--r:-3deg;"><img src="photo-3.jpg"></div>
-        <div class="polaroid" style="--r:5deg;"><img src="photo-4.jpg"></div>
+    <div class="gallery-split">
+        <div class="polaroid-big" style="--r:-4deg;">
+            <img src="photo-1.jpg">
+            <p class="quote">"In your light, I learn how to love."</p>
+        </div>
+        <div class="polaroid-big" style="--r:4deg;">
+            <img src="photo-2.jpg">
+            <p class="quote">"You are my favorite thought."</p>
+        </div>
     </div>
 </div>
 
@@ -91,7 +89,20 @@
         <div class="card" onclick="pop('Our Rhythm','Efforts are still the same! we never change and always lovee each other the mostt.. no ego no embaressment🥰🫂📈')">❣️<br>Our Rhythm</div>
         <div class="card" onclick="pop('Small Things','Teasing each other without getting annoyed😌 these are small things which keeps us together😁🥰😘')">🤔<br>Small Things</div>
         <div class="card" onclick="pop('My Belief','I believe in You.I believe that u will alawys be with me will always support me and will always love me🫂')">👽<br>My Belief</div>
-        <div class="card" onclick="pop('Thanks','Thanks too the 26 date thanks to ur friends thanks to universe thankss too everyonee who helped to bring us together... andd biggest thankss to u who stayed with me😶‍🌫️🙏🤝 ')">🤝🙏<br>The Spark</div>
+        <div class="card" onclick="pop('Thanks','Thanks too the 26 date thanks to ur friends thanks to universe thankss too everyonee who helped to bring us together... andd biggest thankss to u who stayed with me😶‍=🙏🤝 ')">🤝🙏<br>The Spark</div>
+    </div>
+</div>
+
+<div class="slide">
+    <div class="gallery-split">
+        <div class="polaroid-big" style="--r:-3deg;">
+            <img src="photo-3.jpg">
+            <p class="quote">"Home is wherever I'm with you."</p>
+        </div>
+        <div class="polaroid-big" style="--r:3deg;">
+            <img src="photo-4.jpg">
+            <p class="quote">"My heart is, and always will be, yours."</p>
+        </div>
     </div>
 </div>
 
@@ -112,7 +123,7 @@
 
 <div id="final-screen">
     <div style="padding: 25px;">
-        <img src="best.jpg" style="width: 160px; height: 160px; border-radius: 50%; border: 4px solid white; object-fit: cover; margin-bottom: 20px; box-shadow: 0 0 25px rgba(255,255,255,0.6);">
+        <img src="best.jpg" style="width: 180px; height: 180px; border-radius: 50%; border: 4px solid white; object-fit: cover; margin-bottom: 20px; box-shadow: 0 0 25px rgba(255,255,255,0.6);">
         <h1 style="font-size: 3rem; margin-bottom: 20px;">I LOVE YOU</h1>
         <p style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 20px; font-size: 0.9rem;">manuuuuuu 😋🤩😍🩷🩷🤝🏻🩷🤩😋🥳🙈🙈😮‍💨🫂🥺🤍😘👽🤍🤍🤍🫂🥺😘👽🥰🥰🩷🙈😍🥰🩷🤝🏻🤝🏻🩷🥰👽😘😘😘🥺🥺🫂🥺🤩😍🤩🥳🥳😍🥰🤝🏻🤝🏻🥰😍😘👽😘😘👽🤩</p>
     </div>
@@ -140,13 +151,14 @@
         slides[idx].classList.remove('active');
         idx += dir;
         slides[idx].classList.add('active');
-        document.getElementById('navbar').style.display = (idx > 0 && idx < 6) ? 'flex' : 'none';
-        fill.style.height = (idx / 6 * 100) + '%';
-        if(idx === 5) initBubbles(); 
+        // Now spans 8 slides total
+        document.getElementById('navbar').style.display = (idx > 0 && idx < 7) ? 'flex' : 'none';
+        fill.style.height = (idx / 7 * 100) + '%';
+        if(idx === 6) initBubbles(); 
     }
 
     function pop(tit, txt) { document.getElementById('p-tit').innerText = tit; document.getElementById('p-txt').innerText = txt; document.getElementById('ov').style.display='flex'; }
-    function openLetter() { pop('The 26 March Note 💌', "Hi, I'm leaving Kota today... (full text in your repo)"); }
+    function openLetter() { pop('The 26 March Note 💌', "Hi, I'm leaving Kota today... miss you already. (Check full letter in repo)"); }
     function dodge() { const b = document.getElementById('no'); b.style.position = 'fixed'; b.style.left = Math.random()*70+15+'%'; b.style.top = Math.random()*70+15+'%'; }
 
     const reasons = [{t:'Eyes', e:'👀'}, {t:'Smile', e:'😊'}, {t:'Laugh', e:'😂'}, {t:'Vibe', e:'✨'}, {t:'Soul', e:'🤍'}, {t:'Voice', e:'🎙️'}, {t:'Care', e:'🫂'}, {t:'Patience', e:'😇'}];
@@ -178,7 +190,7 @@
                 heart.classList.add('heart-explode');
                 setTimeout(() => {
                     const fs = document.getElementById('final-screen'); fs.style.display = 'flex';
-                    setTimeout(() => { fs.style.opacity = '1'; }, 100);
+                    setTimeout(() => { fs.style.opacity = '1'; rain(); }, 100);
                 }, 600);
             }, 1500);
         }, 300);
@@ -187,9 +199,28 @@
     function updateTimer() {
         const diff = new Date('February 23, 2026') - new Date();
         const d = Math.floor(diff/(1000*60*60*24)), h = Math.floor((diff/(1000*60*60))%24), m = Math.floor((diff/1000/60)%60), s = Math.floor((diff/1000)%60);
-        document.getElementById('timer').innerText = `${d}d ${h}h ${m}m ${s}s`;
+        document.getElementById('timer').innerText = `${d}h ${h}m ${s}s`;
     }
     setInterval(updateTimer, 1000);
+
+    function createBGHeart() {
+        const h = document.createElement('div'); h.innerHTML = '❤️'; h.style.position='absolute';
+        h.style.left = Math.random()*100+'vw'; h.style.bottom = '-20px'; h.style.opacity = Math.random()*0.2;
+        h.style.transition = (Math.random()*5+5)+'s linear'; document.getElementById('bgHearts').appendChild(h);
+        setTimeout(() => { h.style.bottom = '100vh'; setTimeout(()=>h.remove(), 6000); }, 100);
+    }
+    setInterval(createBGHeart, 800);
+
+    function rain() {
+        for(let i=0; i<85; i++) {
+            setTimeout(() => {
+                const h = document.createElement('div'); h.innerHTML = '❤️'; h.style.position='fixed';
+                h.style.left = Math.random()*100+'vw'; h.style.bottom = '-20px'; h.style.transition = (Math.random()*2+3)+'s linear';
+                h.style.zIndex='9999'; document.body.appendChild(h);
+                setTimeout(()=> h.style.bottom = '110vh', 50);
+            }, i * 40);
+        }
+    }
 </script>
 </body>
 </html>
