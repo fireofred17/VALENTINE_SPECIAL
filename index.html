@@ -14,41 +14,49 @@
         @keyframes grad { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
         .floating-hearts-bg { position: fixed; inset: 0; pointer-events: none; z-index: -1; }
 
-        /* HEART PROGRESS - Top Right */
-        .heart-container { 
-            position: fixed; top: 20px; right: 20px; width: 35px; height: 32px; z-index: 2000; 
-            transition: all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55); 
-        }
+        /* HEART PROGRESS */
+        .heart-container { position: fixed; top: 20px; right: 20px; width: 35px; height: 32px; z-index: 2000; transition: all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55); }
         .h-shape { width: 100%; height: 100%; background: rgba(255,255,255,0.2); clip-path: path('M17.5 5C14 -2 0 -2 0 9C0 16 17.5 28 17.5 28C17.5 28 35 16 35 9C35 -2 21 -2 17.5 5Z'); }
         .h-fill { position: absolute; bottom: 0; width: 100%; height: 0%; background: white; transition: height 0.5s; }
 
-        /* CONTENT POSITIONING */
+        /* SLIDES */
         .slide { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px; text-align: center; opacity: 0; visibility: hidden; transition: 0.6s ease; }
         .slide.active { opacity: 1; visibility: visible; }
 
+        /* CARD GRID & FLIP LOGIC */
         .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 100%; max-width: 330px; }
-        .card { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); padding: 15px; border-radius: 18px; font-family: 'Playfair Display'; height: 130px; display: flex; flex-direction: column; align-items: center; justify-content: center; backdrop-filter: blur(8px); }
+        .card { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); padding: 15px; border-radius: 18px; font-family: 'Playfair Display'; height: 130px; display: flex; flex-direction: column; align-items: center; justify-content: center; backdrop-filter: blur(8px); cursor: pointer; transition: transform 0.3s; }
+        .card:active { transform: scale(0.95); }
+
+        /* POPUP OVERLAY WITH FLIP */
+        .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); display: none; align-items: center; justify-content: center; z-index: 6000; padding: 25px; perspective: 1000px; }
+        .popup { background: white; color: #333; padding: 30px; border-radius: 25px; width: 100%; max-width: 400px; font-family: 'Playfair Display'; box-shadow: 0 20px 50px rgba(0,0,0,0.5); transform-style: preserve-3d; animation: flipOpen 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
         
+        @keyframes flipOpen {
+            from { transform: rotateY(-180deg) scale(0.3); opacity: 0; }
+            to { transform: rotateY(0deg) scale(1); opacity: 1; }
+        }
+
+        /* POLAROID GALLERY */
         .gallery { display: flex; gap: 15px; perspective: 1000px; }
         .polaroid { background: white; padding: 8px 8px 25px 8px; width: 145px; transform: rotate(var(--r)); box-shadow: 0 15px 35px rgba(0,0,0,0.4); }
         .polaroid img { width: 100%; height: 150px; object-fit: cover; }
 
+        /* BUBBLES */
         .bubble-container { position: relative; width: 100%; height: 260px; margin-top: 10px; }
-        .bubble-item { position: absolute; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem; width: 85px; height: 85px; animation: floatBubble 4s ease-in-out infinite; backdrop-filter: blur(5px); }
+        .bubble-item { position: absolute; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem; width: 85px; height: 85px; animation: floatBubble 4s ease-in-out infinite; backdrop-filter: blur(5px); cursor: pointer; }
         @keyframes floatBubble { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
 
         .btn { padding: 14px 30px; border-radius: 50px; border: none; font-weight: 600; background: white; color: #8a0038; cursor:pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
         .nav-btn { background: rgba(255,255,255,0.1); color: white; border: 1px solid white; padding: 10px 25px; border-radius: 30px; cursor:pointer;}
 
-        /* FINAL SEQUENCE STYLES */
+        /* FINAL SEQUENCE */
         .heart-mid { top: 50% !important; right: 50% !important; transform: translate(50%, -50%) scale(4) !important; }
         .heart-explode { transform: translate(50%, -50%) scale(60) !important; opacity: 0; transition: transform 1.2s ease-in, opacity 0.8s ease-in !important; }
         .shaking { animation: pulse 0.6s infinite alternate; }
         @keyframes pulse { from { transform: translate(50%, -50%) scale(4); } to { transform: translate(50%, -50%) scale(4.5); } }
 
         #final-screen { position: fixed; inset: 0; display: none; flex-direction: column; align-items: center; justify-content: center; z-index: 8000; background: radial-gradient(circle, #ff4d6d, #8a0038, #1a0a0d); opacity: 0; transition: opacity 1.5s ease; }
-        .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.9); display: none; align-items: center; justify-content: center; z-index: 6000; padding: 25px; }
-        .popup { background: white; color: #333; padding: 30px; border-radius: 20px; width: 100%; font-family: 'Playfair Display'; }
     </style>
 </head>
 <body>
@@ -60,7 +68,9 @@
     <div class="h-shape"><div class="h-fill" id="fill"></div></div>
 </div>
 
-<audio id="mySong" loop><source src="tum-se.mp3" type="audio/mpeg"></audio>
+<audio id="mySong" preload="auto" loop>
+    <source src="tum-se.mp3" type="audio/mpeg">
+</audio>
 
 <div class="slide active">
     <h1 style="font-family:'Playfair Display'; font-size: 3rem; font-style: italic;">Hii Manuu...</h1>
@@ -73,7 +83,7 @@
     <div class="card-grid">
         <div class="card" onclick="pop('The First Walk🚶‍♂️','21st April: our first walk.who knew that those walk will be the sweetest part of our memory👽🥰👣')">👣<br>The First Walk</div>
         <div class="card" onclick="pop('Hand holding🤝','5th May: Holding hands forr thee firstt time.the way we both blushed wass too embarissing🤡😙🤝')">🤝<br>The First Touch</div>
-        <div class="card" onclick="pop('vid call😶‍🌫️','30th May: That video calls!👽dayummm thatt was somethingg special andd crazyyy😈😘')">👽<br>Pure Chaos</div>
+        <div class="card" onclick="pop('vid call😶‍米','30th May: That video calls!👽dayummm thatt was somethingg special andd crazyyy😈😘')">👽<br>Pure Chaos</div>
         <div class="card" onclick="pop('The Silly Try🎁','9th June: My wierd gift for ur sister😭😭.still feels like I was a differnt kinda fool🙄🙄🤝')">🎁<br>The Silly Try</div>
     </div>
 </div>
@@ -148,7 +158,13 @@
     <button class="nav-btn" onclick="move(1)">Next →</button>
 </div>
 
-<div class="overlay" id="ov" onclick="this.style.display='none'"><div class="popup"><h3 id="p-tit" style="color:#8a0038;"></h3><p id="p-txt" style="margin-top:10px;"></p></div></div>
+<div class="overlay" id="ov" onclick="this.style.display='none'">
+    <div class="popup" onclick="event.stopPropagation()">
+        <h3 id="p-tit" style="color:#8a0038; margin-bottom:10px;"></h3>
+        <p id="p-txt" style="font-size: 1.1rem; line-height: 1.5;"></p>
+        <button class="btn" style="margin-top:20px; width:100%;" onclick="document.getElementById('ov').style.display='none'">Close</button>
+    </div>
+</div>
 
 <script>
     let idx = 0;
@@ -157,7 +173,14 @@
     const fill = document.getElementById('fill');
     const heart = document.getElementById('heartUI');
 
-    function startJourney() { song.play().catch(()=>{}); move(1); }
+    function startJourney() { 
+        song.play().then(() => {
+            console.log("Music playing");
+        }).catch((e) => {
+            console.log("Music blocked, retry on click");
+        }); 
+        move(1); 
+    }
     
     function move(dir) {
         slides[idx].classList.remove('active');
@@ -167,28 +190,35 @@
         fill.style.height = (idx / 7 * 100) + '%';
     }
 
-    function pop(tit, txt) { document.getElementById('p-tit').innerText = tit; document.getElementById('p-txt').innerText = txt; document.getElementById('ov').style.display='flex'; }
+    function pop(tit, txt) { 
+        document.getElementById('p-tit').innerText = tit; 
+        document.getElementById('p-txt').innerText = txt; 
+        document.getElementById('ov').style.display='flex'; 
+    }
+
     function openLetter() { document.getElementById('letterBody').style.display = 'block'; }
-    function dodge() { const b = document.getElementById('no'); b.style.position = 'fixed'; b.style.left = Math.random()*70+15+'%'; b.style.top = Math.random()*70+15+'%'; }
+    
+    function dodge() { 
+        const b = document.getElementById('no'); 
+        b.style.position = 'fixed'; 
+        b.style.left = Math.random()*70+15+'%'; 
+        b.style.top = Math.random()*70+15+'%'; 
+    }
     
     function finalSequence() {
-        // 1. Clear text and Navbar
         document.getElementById('q-content').style.opacity = '0';
         document.getElementById('navbar').style.display = 'none';
         
-        // 2. Move heart to center smoothly
         setTimeout(() => {
             heart.classList.add('heart-mid');
             fill.style.height = '100%';
             
-            // 3. Shake/Pulse then explode
             setTimeout(() => {
                 heart.classList.add('shaking');
                 setTimeout(() => {
                     heart.classList.remove('shaking');
                     heart.classList.add('heart-explode');
                     
-                    // 4. Show final screen
                     setTimeout(() => {
                         const fs = document.getElementById('final-screen');
                         fs.style.display = 'flex';
@@ -201,6 +231,10 @@
 
     function updateTimer() {
         const diff = new Date('February 23, 2026') - new Date();
+        if (diff <= 0) {
+            document.getElementById('timer').innerText = "Happy Anniversary/Valentine's!";
+            return;
+        }
         const d = Math.floor(diff / (1000 * 60 * 60 * 24));
         const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
         const m = Math.floor((diff / 1000 / 60) % 60);
