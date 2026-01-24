@@ -165,18 +165,49 @@
     function dodge() { const b = document.getElementById('no'); b.style.position = 'fixed'; b.style.left = Math.random()*70+15+'%'; b.style.top = Math.random()*70+15+'%'; }
 
     const reasons = [{t:'Eyes', e:'👀'}, {t:'Smile', e:'😊'}, {t:'Laugh', e:'😂'}, {t:'Vibe', e:'✨'}, {t:'Soul', e:'🤍'}, {t:'Voice', e:'🎙️'}, {t:'Care', e:'🫂'}, {t:'Patience', e:'😇'}];
-    function initBubbles() {
-        const con = document.getElementById('bubbleGame'); con.innerHTML = '';
-        reasons.forEach(r => {
-            const b = document.createElement('div'); b.className = 'bubble-item'; b.innerText = r.t;
-            b.style.left = Math.random()*70+10+'%'; b.style.top = Math.random()*70+10+'%';
-            b.style.animation = `floatB ${3+Math.random()*2}s infinite alternate ease-in-out`;
+   function initBubbles() {
+        const con = document.getElementById('bubbleGame'); 
+        con.innerHTML = '';
+        
+        // This spreads bubbles into a 3x3 grid so they can't clump together
+        const columns = 3;
+        const rows = 3;
+        const cellWidth = 100 / columns;
+        const cellHeight = 100 / rows;
+
+        reasons.forEach((r, i) => {
+            const b = document.createElement('div'); 
+            b.className = 'bubble-item'; 
+            b.innerText = r.t;
+            
+            // Assign each bubble to a specific grid cell
+            const col = i % columns;
+            const row = Math.floor(i / columns);
+
+            // Position within the cell with a bit of random offset
+            const left = (col * cellWidth) + (Math.random() * (cellWidth - 25)) + 5;
+            const top = (row * cellHeight) + (Math.random() * (cellHeight - 25)) + 5;
+
+            b.style.left = left + '%';
+            b.style.top = top + '%';
+            
+            // Give them different speeds and delays so they feel natural
+            b.style.animation = `floatB ${3+Math.random()*3}s infinite alternate ease-in-out`;
+            b.style.animationDelay = `${Math.random() * 2}s`;
+
             b.onclick = (e) => {
-                const emo = document.createElement('div'); emo.className = 'pop-emoji'; emo.innerText = r.e;
-                emo.style.left = e.clientX+'px'; emo.style.top = e.clientY+'px';
+                const emo = document.createElement('div'); 
+                emo.className = 'pop-emoji'; 
+                emo.innerText = r.e;
+                emo.style.left = e.clientX + 'px'; 
+                emo.style.top = e.clientY + 'px';
                 document.body.appendChild(emo);
                 b.classList.add('bubble-pop');
-                setTimeout(() => { b.remove(); emo.remove(); if(!document.querySelector('.bubble-item')) pop('Every Single Part! ❤️', 'I love every little thing about you.'); }, 400);
+                setTimeout(() => { 
+                    b.remove(); 
+                    emo.remove(); 
+                    if(!document.querySelector('.bubble-item')) pop('Every Single Part! ❤️', 'I love every little thing about you.'); 
+                }, 400);
             };
             con.appendChild(b);
         });
