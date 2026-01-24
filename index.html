@@ -15,31 +15,30 @@
         .slide { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; text-align: center; opacity: 0; visibility: hidden; transition: 0.6s ease; }
         .slide.active { opacity: 1; visibility: visible; }
 
-        /* 3D CARD FLIP STYLES */
-        .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 100%; max-width: 330px; perspective: 1000px; }
-        .card-inner { position: relative; width: 100%; height: 120px; text-align: center; transition: transform 0.6s; transform-style: preserve-3d; cursor: pointer; }
-        .card-inner.flipped { transform: rotateY(180deg); }
-        .card-front, .card-back { position: absolute; width: 100%; height: 100%; -webkit-backface-visibility: hidden; backface-visibility: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; border-radius: 18px; border: 1px solid rgba(255,255,255,0.2); backdrop-filter: blur(8px); padding: 10px; }
-        .card-front { background: rgba(255,255,255,0.1); }
-        .card-back { background: white; color: #8a0038; transform: rotateY(180deg); font-size: 0.7rem; font-weight: 600; line-height: 1.2; }
+        /* ORIGINAL GLASS CARDS */
+        .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 100%; max-width: 330px; }
+        .card { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); padding: 15px; border-radius: 18px; height: 120px; display: flex; flex-direction: column; align-items: center; justify-content: center; backdrop-filter: blur(8px); cursor: pointer; transition: transform 0.2s; }
+        .card:active { transform: scale(0.95); }
 
-        /* POLAROID STYLES */
+        /* ENHANCED POLAROID FRAMES */
         .gallery-split { display: flex; flex-direction: column; gap: 20px; align-items: center; width: 100%; }
         .polaroid-big { background: white; padding: 10px 10px 35px 10px; width: 220px; box-shadow: 0 15px 35px rgba(0,0,0,0.5); transform: rotate(var(--r)); }
         .polaroid-big img { width: 100%; height: 200px; object-fit: cover; }
         .quote { font-family: 'Playfair Display'; color: #8a0038; font-size: 0.8rem; margin-top: 10px; font-weight: 700; font-style: italic; }
 
-        /* UI ELEMENTS */
         .btn { padding: 14px 30px; border-radius: 50px; border: none; font-weight: 600; background: white; color: #8a0038; cursor:pointer; }
         .nav-btn { background: rgba(255,255,255,0.1); color: white; border: 1px solid white; padding: 10px 25px; border-radius: 30px; cursor:pointer; }
-        #final-screen { position: fixed; inset: 0; display: none; flex-direction: column; align-items: center; justify-content: center; z-index: 8000; background: radial-gradient(circle, #ff4d6d, #8a0038, #1a0a0d); opacity: 0; transition: opacity 1.5s ease; }
         
-        /* BUBBLE POP GAME */
+        /* BUBBLES */
         .bubble-container { position: relative; width: 100%; height: 350px; }
-        .bubble-item { position: absolute; background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.1) 40%); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; width: 85px; height: 85px; backdrop-filter: blur(2px); cursor: pointer; font-size: 0.8rem; }
+        .bubble-item { position: absolute; background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.1) 40%); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; width: 85px; height: 85px; backdrop-filter: blur(2px); cursor: pointer; }
         @keyframes floatB { 0%, 100% { transform: translate(0,0); } 33% { transform: translate(10px, -15px); } 66% { transform: translate(-10px, -10px); } }
 
-        /* HEART PROGRESS */
+        /* OVERLAY / POPUP */
+        .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(12px); display: none; align-items: center; justify-content: center; z-index: 6000; padding: 25px; }
+        .popup { background: white; color: #333; padding: 30px; border-radius: 25px; width: 100%; max-width: 350px; text-align: center; }
+
+        #final-screen { position: fixed; inset: 0; display: none; flex-direction: column; align-items: center; justify-content: center; z-index: 8000; background: radial-gradient(circle, #ff4d6d, #8a0038, #1a0a0d); opacity: 0; transition: opacity 1.5s ease; }
         .heart-container { position: fixed; top: 20px; right: 20px; width: 35px; height: 32px; z-index: 2000; transition: all 1s; }
         .h-shape { width: 100%; height: 100%; background: rgba(255,255,255,0.2); clip-path: path('M17.5 5C14 -2 0 -2 0 9C0 16 17.5 28 17.5 28C17.5 28 35 16 35 9C35 -2 21 -2 17.5 5Z'); }
         .h-fill { position: absolute; bottom: 0; width: 100%; height: 0%; background: white; transition: height 0.5s; }
@@ -62,22 +61,10 @@
 <div class="slide">
     <h2 style="font-family:'Playfair Display'; margin-bottom: 20px;">Chapters of Us 📅</h2>
     <div class="card-grid">
-        <div class="card-inner" onclick="this.classList.toggle('flipped')">
-            <div class="card-front">👣<br>The First Walk</div>
-            <div class="card-back">21st April: who knew those walks would be the sweetest part? 👣</div>
-        </div>
-        <div class="card-inner" onclick="this.classList.toggle('flipped')">
-            <div class="card-front">🤝<br>The First Touch</div>
-            <div class="card-back">5th May: Holding hands and blushing like idiots! 🤝</div>
-        </div>
-        <div class="card-inner" onclick="this.classList.toggle('flipped')">
-            <div class="card-front">👽<br>Pure Chaos</div>
-            <div class="card-back">30th May: That video call was pure crazy energy! 😈</div>
-        </div>
-        <div class="card-inner" onclick="this.classList.toggle('flipped')">
-            <div class="card-front">🎁<br>The Silly Try</div>
-            <div class="card-back">9th June: That weird gift for your sister... I was a fool! 😭</div>
-        </div>
+        <div class="card" onclick="pop('The First Walk🚶‍♂️','21st April: our first walk. who knew that those walk will be the sweetest part of our memory👽🥰👣')">👣<br>The First Walk</div>
+        <div class="card" onclick="pop('Hand holding🤝','5th May: Holding hands for the first time. the way we both blushed was too embarrassing🤡😙🤝')">🤝<br>The First Touch</div>
+        <div class="card" onclick="pop('vid call👽','30th May: That video call! Dayum that was something special and crazy😈😘')">👽<br>Pure Chaos</div>
+        <div class="card" onclick="pop('The Silly Try🎁','9th June: My weird gift for ur sister😭😭. still feels like I was a different kind of fool🙄🙄🤝')">🎁<br>The Silly Try</div>
     </div>
 </div>
 
@@ -89,7 +76,7 @@
 </div>
 
 <div class="slide">
-    <div style="background: white; color: #8a0038; padding: 35px; border-radius: 20px; cursor: pointer; max-width: 300px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);" onclick="pop('The Letter 💌', 'Put your full 26 March text here! It looks amazing.')">
+    <div style="background: white; color: #8a0038; padding: 35px; border-radius: 20px; cursor: pointer; max-width: 300px;" onclick="pop('The 26 March Letter 💌', 'Hi, I am leaving Kota today... (Insert your full text here)')">
         <span style="font-size: 3rem;">✉️</span>
         <p style="font-weight: 600; margin-top: 10px;">The 26 March Letter</p>
     </div>
@@ -97,28 +84,16 @@
 
 <div class="slide">
     <div class="card-grid">
-        <div class="card-inner" onclick="this.classList.toggle('flipped')">
-            <div class="card-front">❣️<br>Our Rhythm</div>
-            <div class="card-back">Efforts are still the same! No ego, just us. 📈</div>
-        </div>
-        <div class="card-inner" onclick="this.classList.toggle('flipped')">
-            <div class="card-front">🤔<br>Small Things</div>
-            <div class="card-back">Teasing each other is my favorite hobby. 🥰</div>
-        </div>
-        <div class="card-inner" onclick="this.classList.toggle('flipped')">
-            <div class="card-front">👽<br>My Belief</div>
-            <div class="card-back">I believe in us, always and forever. 🫂</div>
-        </div>
-        <div class="card-inner" onclick="this.classList.toggle('flipped')">
-            <div class="card-front">🤝🙏<br>The Spark</div>
-            <div class="card-back">Thanks to the universe for bringing us together! 💖</div>
-        </div>
+        <div class="card" onclick="pop('Our Rhythm','Efforts are still the same! we never change and always love each other the most.. no ego🫂📈')">❣️<br>Our Rhythm</div>
+        <div class="card" onclick="pop('Small Things','Teasing each other without getting annoyed😌 these are small things which keep us together😁')">🤔<br>Small Things</div>
+        <div class="card" onclick="pop('My Belief','I believe in You. I believe that u will always be with me and will always love me🫂')">👽<br>My Belief</div>
+        <div class="card" onclick="pop('Thanks','Thanks to the universe for bringing us together! Biggest thanks to u who stayed with me😶‍🌫️🙏')">🤝🙏<br>The Spark</div>
     </div>
 </div>
 
 <div class="slide">
     <div class="gallery-split">
-        <div class="polaroid-big" style="--r:-3deg;"><img src="photo-3.jpg"><p class="quote">"Home is wherever I'm with you."</p></div>
+        <div class="polaroid-big" style="--r:-3deg;"><img src="photo-3.jpg"><p class="quote">"Home is wherever I am with you."</p></div>
         <div class="polaroid-big" style="--r:3deg;"><img src="photo-4.jpg"><p class="quote">"My heart will always be yours."</p></div>
     </div>
 </div>
@@ -137,16 +112,14 @@
 </div>
 
 <div id="final-screen">
-    <div style="padding: 25px; text-align: center;">
-        <img src="best.jpg" style="width: 200px; height: 200px; border-radius: 50%; border: 4px solid white; object-fit: cover; margin-bottom: 20px;">
-        <h1 style="font-size: 3rem; margin-bottom: 20px;">I LOVE YOU</h1>
-        <p style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 15px; font-size: 0.8rem;">manuuuuuu 😋🤩😍🩷🩷🤝🏻🩷🤩😋🥳🙈🙈😮‍💨🫂🥺🤍😘👽🤍🤍🤍🫂🥺😘👽🥰🥰🩷🙈😍🥰🩷🤝🏻🤝🏻🩷🥰👽😘😘😘🥺🥺🫂🥺🤩</p>
-    </div>
+    <img src="best.jpg" style="width: 200px; height: 200px; border-radius: 50%; border: 4px solid white; object-fit: cover; margin-bottom: 20px;">
+    <h1 style="font-size: 3rem; margin-bottom: 20px;">I LOVE YOU</h1>
+    <p style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 15px; width: 80%;">manuuuuuu 😋🤩😍🩷🩷🤝🏻🩷🤩😋🥳🙈🙈😮‍💨🫂🥺🤍😘👽🤍</p>
 </div>
 
 <div id="navbar" style="position:fixed; bottom:40px; display:none; gap:50px; z-index:500;"><button class="nav-btn" onclick="move(-1)">Back</button><button class="nav-btn" onclick="move(1)">Next →</button></div>
 
-<div class="overlay" id="ov" onclick="this.style.display='none'"><div class="popup" onclick="event.stopPropagation()"><h3 id="p-tit" style="color:#8a0038; margin-bottom:10px;"></h3><p id="p-txt"></p><button class="btn" style="width:100%; margin-top:20px; font-size:0.8rem;">Close</button></div></div>
+<div class="overlay" id="ov" onclick="this.style.display='none'"><div class="popup" onclick="event.stopPropagation()"><h3 id="p-tit" style="color:#8a0038; margin-bottom:10px;"></h3><p id="p-txt"></p><button class="btn" style="width:100%; margin-top:20px;">Close</button></div></div>
 
 <script>
     let idx = 0;
@@ -195,9 +168,8 @@
         setTimeout(() => {
             heartUI.style.transform = 'translate(50%, -50%) scale(100)'; heartUI.style.opacity = '0';
             setTimeout(() => { 
-                const fs = document.getElementById('final-screen'); 
-                fs.style.display = 'flex'; setTimeout(() => fs.style.opacity = '1', 50);
-                rain();
+                const fs = document.getElementById('final-screen'); fs.style.display = 'flex'; 
+                setTimeout(() => fs.style.opacity = '1', 50); rain();
             }, 600);
         }, 1500);
     }
