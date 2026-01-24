@@ -128,8 +128,15 @@
     const song = document.getElementById('mySong');
     const fill = document.getElementById('fill');
     
-    function startJourney() { song.play(); move(1); }
-    
+    function startJourney() { 
+    song.play().then(() => {
+        console.log("Music playing!");
+    }).catch(e => {
+        // This handles cases where the browser blocks it until the first touch
+        console.log("Audio waiting for interaction");
+    }); 
+    move(1); 
+}
     function move(dir) {
         slides[idx].classList.remove('active');
         idx += dir;
