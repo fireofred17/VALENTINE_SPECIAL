@@ -72,7 +72,7 @@
         .polaroid-big { background: #fff; padding: 12px 12px 35px 12px; width: 220px; box-shadow: 0 20px 50px rgba(0,0,0,0.1); transform: rotate(var(--r)); margin-bottom: 10px; }
         .btn { padding: 18px 40px; border-radius: 50px; border: none; font-weight: 600; background: white; color: var(--red); cursor:pointer; box-shadow: 0 10px 25px rgba(0,0,0,0.1); transition: 0.3s; }
         
-        .bubble-item { position: absolute; background: rgba(255,255,255,0.8); border-radius: 50%; display: flex; align-items: center; justify-content: center; width: 85px; height: 85px; cursor: pointer; border: 1px solid #fff; animation: floatB 4s infinite alternate ease-in-out; }
+        .bubble-item { position: absolute; background: rgba(255,255,255,0.8); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 90px; height: 90px; cursor: pointer; border: 1px solid #fff; animation: floatB 4s infinite alternate ease-in-out; font-size: 0.8rem; font-weight: 600; }
         @keyframes floatB { from { transform: translate(0,0); } to { transform: translate(10px, -20px); } }
 
         #final-screen { position: fixed; inset: 0; display: none; flex-direction: column; align-items: center; justify-content: center; z-index: 8000; background: radial-gradient(circle at center, #ff85a1 0%, #ff4d6d 100%); opacity: 0; transition: opacity 1.5s ease; overflow: hidden; }
@@ -123,8 +123,8 @@
     <div class="heart-container" id="heartUI"><div class="h-shape"><div class="h-fill" id="fill"></div></div></div>
     
     <div class="slide active">
-        <h1 style="font-family:'Playfair Display'; font-size: 3.5rem; color: white; margin-bottom: 20px;">Hii Manuu...</h1>
-        <button class="btn" onclick="startJourney()">Open My Heart</button>
+        <h1 style="font-family:'Playfair Display'; font-size: 3.5rem; color: white;">Hii Manuu...</h1>
+        <button class="btn" style="margin-top: 45px;" onclick="startJourney()">Open My Heart</button>
     </div>
 
     <div class="slide">
@@ -167,7 +167,7 @@
     <div id="final-screen">
         <img src="best.jpg" style="width: 180px; height: 180px; border-radius: 50%; border: 6px solid #fff; object-fit: cover; margin-bottom: 20px; z-index: 10;">
         <h1 style="font-family:'Playfair Display'; font-size: 3rem; color: #fff; z-index: 10;">I LOVE YOU</h1>
-        <div class="glass-msg">manuuuuuu 😋🤩😍🩷🩷🤝🏻🩷🤩😋🥳🙈🙈😮‍💨🫂🥺🤍😘👽🤍😍😈🥰😋🫠... (Your emoji string here)</div>
+        <div class="glass-msg">manuuuuuu 😋🤩😍🩷🩷🤝🏻🩷🤩😋🥳🙈🙈... (Add Your Emojis)</div>
     </div>
 
     <div id="navbar" style="position:fixed; bottom:40px; display:none; gap:60px; z-index:500;"><button class="btn" onclick="move(-1)" style="padding:10px 25px;">Back</button><button class="btn" onclick="move(1)" style="padding:10px 25px;">Next</button></div>
@@ -177,7 +177,6 @@
 <script>
     const song = document.getElementById('mySong');
     
-    // Part 1 Logic
     function createKisses() {
         const container = document.getElementById('particle-container');
         const icons = ['💋', '❤️', '😘'];
@@ -224,7 +223,6 @@
         }, 1200);
     }
 
-    // Part 2 Logic
     let idx = 0;
     const slides = document.querySelectorAll('.slide');
     const fill = document.getElementById('fill');
@@ -243,7 +241,8 @@
         const con = document.getElementById('bubbleGame'); con.innerHTML = '';
         const reas = [{t:'Eyes', e:'👀'}, {t:'Smile', e:'😊'}, {t:'Laugh', e:'😂'}, {t:'Vibe', e:'✨'}, {t:'Soul', e:'🤍'}];
         reas.forEach((r) => {
-            const b = document.createElement('div'); b.className = 'bubble-item'; b.innerText = r.t;
+            const b = document.createElement('div'); b.className = 'bubble-item'; 
+            b.innerHTML = `<span>${r.e}</span><span>${r.t}</span>`;
             b.style.left = Math.random()*70+10 + '%'; b.style.top = Math.random()*70+10 + '%';
             b.onclick = () => { b.remove(); if(!document.querySelector('.bubble-item')) pop('Every Single Part! ❤️', 'I love everything about you.'); };
             con.appendChild(b);
