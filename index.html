@@ -123,9 +123,8 @@
     <div class="heart-container" id="heartUI"><div class="h-shape"><div class="h-fill" id="fill"></div></div></div>
     
     <div class="slide active">
-        <h1 style="font-family:'Playfair Display'; font-size: 3.5rem; color: white;">Hii Manuu...</h1>
-        <div id="timer" style="font-family:'Playfair Display'; font-size: 1.3rem; margin-top: 15px; color: white;"></div>
-        <button class="btn" style="margin-top: 45px;" onclick="startJourney()">Open My Heart</button>
+        <h1 style="font-family:'Playfair Display'; font-size: 3.5rem; color: white; margin-bottom: 20px;">Hii Manuu...</h1>
+        <button class="btn" onclick="startJourney()">Open My Heart</button>
     </div>
 
     <div class="slide">
@@ -221,7 +220,7 @@
             document.getElementById('journey-root').style.display = 'none';
             document.getElementById('final-valentine-root').style.display = 'block';
             whiteout.style.opacity = '0';
-            createPetals(); updateTimer();
+            createPetals();
         }, 1200);
     }
 
@@ -274,13 +273,6 @@
             con.appendChild(p);
         }
     }
-
-    function updateTimer() {
-        const diff = new Date('February 14, 2026') - new Date();
-        const d = Math.floor(diff/(1000*60*60*24)), h = Math.floor((diff/(1000*60*60))%24), m = Math.floor((diff/1000/60)%60), s = Math.floor((diff/1000)%60);
-        const tDiv = document.getElementById('timer'); if(tDiv) tDiv.innerText = `${d}d ${h}h ${m}m ${s}s`;
-    }
-    setInterval(updateTimer, 1000);
 </script>
 </body>
 </html>
