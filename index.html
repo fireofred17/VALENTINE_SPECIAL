@@ -12,19 +12,24 @@
         body { 
             height: 100vh; width: 100vw; overflow: hidden; 
             font-family: 'Poppins', sans-serif; background: #000; 
-            transition: background 1.5s ease;
         }
 
-        /* JOURNEY SLIDES STYLES */
+        /* --- PART 1: JOURNEY SLIDES --- */
         .slide-journey { 
             position: absolute; inset: 0; display: flex; flex-direction: column; 
             align-items: center; justify-content: center; text-align: center;
             opacity: 0; visibility: hidden; transition: opacity 0.8s ease-in-out;
+            z-index: 5; height: 100vh; width: 100vw;
         }
         .slide-journey.active { opacity: 1; visibility: visible; }
 
-        .rainbow-bg { background: linear-gradient(45deg, #ff5f6d, #ffc371, #ff5f6d); background-size: 200% 200%; animation: rainbowFlow 5s ease infinite; }
+        .rainbow-bg { 
+            background: linear-gradient(45deg, #ff5f6d, #ffc371, #ff5f6d); 
+            background-size: 400% 400%; 
+            animation: rainbowFlow 8s ease infinite; 
+        }
         @keyframes rainbowFlow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        
         .propose-bg { background: linear-gradient(135deg, #1a062d 0%, #4b0082 100%); }
         .choc-bg { background: #23120b; overflow: hidden; }
         .choc-wave { position: absolute; bottom: -100%; left: 0; width: 100%; height: 100%; background: #3c1e08; transition: bottom 4s cubic-bezier(0.4, 0, 0.2, 1); z-index: -1; }
@@ -32,10 +37,14 @@
         .teddy-bg { background: linear-gradient(180deg, #ffb3c1 0%, #ff85a1 100%); }
         .promise-bg { background: linear-gradient(135deg, #0a1a2d 0%, #162a47 100%); }
         .hug-bg { background: linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%); }
-        .kiss-bg { background: linear-gradient(135deg, #4b0011 0%, #ff4d6d 100%); position: relative; overflow: hidden; }
+        
+        .kiss-bg { 
+            background: linear-gradient(135deg, #4b0011 0%, #ff4d6d 100%); 
+            position: relative; overflow: hidden; height: 100vh; width: 100vw;
+        }
 
-        .kiss-particle { position: absolute; bottom: -10%; font-size: 1.5rem; animation: floatUp 4s linear infinite; opacity: 0; }
-        @keyframes floatUp { 0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; } 20% { opacity: 0.8; } 100% { transform: translateY(-110vh) translateX(50px) rotate(20deg); opacity: 0; } }
+        .kiss-particle { position: absolute; bottom: -10%; font-size: 1.5rem; animation: floatUp 4s linear infinite; opacity: 0; pointer-events: none; }
+        @keyframes floatUp { 0% { transform: translateY(0) rotate(0deg); opacity: 0; } 20% { opacity: 0.8; } 100% { transform: translateY(-110vh) rotate(20deg); opacity: 0; } }
 
         #heart-focus { font-size: 5rem; transition: transform 2.5s ease-in, opacity 2s; }
         .zoom-heart { transform: scale(100); opacity: 0; }
@@ -43,32 +52,43 @@
         .heart-loader { position: relative; width: 120px; height: 110px; background: rgba(255, 255, 255, 0.2); clip-path: path('M60 102c-2 0-5-4-18-14C18 66 0 48 0 30 0 12 14 0 30 0c10 0 22 6 30 14 8-8 20-14 30-14 16 0 30 12 30 30 0 18-18 36-42 58-13 10-16 14-18 14z'); margin-bottom: 20px; }
         .heart-fill-inner { position: absolute; bottom: 0; width: 100%; height: 0%; background: #fff; transition: height 6s cubic-bezier(0.4, 0, 0.2, 1); }
 
-        /* FINAL CODE STYLES (AS PROVIDED) */
+        #transition-whiteout {
+            position: fixed; inset: 0; background: white; z-index: 9999;
+            opacity: 0; pointer-events: none; transition: opacity 1.2s ease-in-out;
+        }
+
+        /* --- PART 2: FINAL VALENTINE SECTION --- */
         #final-valentine-root { display: none; height: 100vh; width: 100vw; background: linear-gradient(180deg, #ff4d6d 0%, #ff85a1 40%, #fff0f3 100%); color: var(--text); overflow: hidden; }
         .petal { position: absolute; background: rgba(255, 255, 255, 0.8); border-radius: 150% 0 150% 0; animation: fall 10s linear infinite; }
         @keyframes fall { 0% { top: -10%; transform: translateX(0) rotate(0deg); opacity: 0; } 10% { opacity: 1; } 100% { top: 110%; transform: translateX(100px) rotate(360deg); opacity: 0; } }
+        
         .slide { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 25px; text-align: center; opacity: 0; visibility: hidden; transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); transform: scale(0.9); }
         .slide.active { opacity: 1; visibility: visible; transform: scale(1); }
+        
         .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; width: 100%; max-width: 340px; }
-        .card { background: rgba(255, 255, 255, 0.6); border: 1px solid white; padding: 15px; border-radius: 25px; height: 130px; display: flex; flex-direction: column; align-items: center; justify-content: center; backdrop-filter: blur(10px); cursor: pointer; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .card { background: rgba(255, 255, 255, 0.6); border: 1px solid white; padding: 15px; border-radius: 25px; height: 130px; display: flex; flex-direction: column; align-items: center; justify-content: center; backdrop-filter: blur(10px); cursor: pointer; transition: 0.4s; }
         .card:active { transform: scale(0.9); }
-        .polaroid-big { background: #fff; padding: 12px 12px 35px 12px; width: 220px; box-shadow: 0 20px 50px rgba(0,0,0,0.1); transform: rotate(var(--r)); }
+        
+        .polaroid-big { background: #fff; padding: 12px 12px 35px 12px; width: 220px; box-shadow: 0 20px 50px rgba(0,0,0,0.1); transform: rotate(var(--r)); margin-bottom: 10px; }
         .btn { padding: 18px 40px; border-radius: 50px; border: none; font-weight: 600; background: white; color: var(--red); cursor:pointer; box-shadow: 0 10px 25px rgba(0,0,0,0.1); transition: 0.3s; }
+        
         .bubble-item { position: absolute; background: rgba(255,255,255,0.8); border-radius: 50%; display: flex; align-items: center; justify-content: center; width: 85px; height: 85px; cursor: pointer; border: 1px solid #fff; animation: floatB 4s infinite alternate ease-in-out; }
         @keyframes floatB { from { transform: translate(0,0); } to { transform: translate(10px, -20px); } }
+
         #final-screen { position: fixed; inset: 0; display: none; flex-direction: column; align-items: center; justify-content: center; z-index: 8000; background: radial-gradient(circle at center, #ff85a1 0%, #ff4d6d 100%); opacity: 0; transition: opacity 1.5s ease; overflow: hidden; }
-        .big-glow-heart { position: absolute; color: rgba(255, 255, 255, 0.3); filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.8)); animation: bigFloat 8s infinite ease-in-out; }
-        @keyframes bigFloat { 0%, 100% { transform: translate(0,0) scale(1); } 50% { transform: translate(30px, -50px) scale(1.15); } }
         .glass-msg { background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.4); border-radius: 30px; padding: 25px; width: 85%; max-height: 200px; overflow-y: auto; color: white; z-index: 10; }
+        
         .overlay { position: fixed; inset: 0; background: rgba(89, 13, 34, 0.85); backdrop-filter: blur(15px); display: none; align-items: center; justify-content: center; z-index: 6000; padding: 30px; }
         .popup { background: #fff; color: var(--text); padding: 35px; border-radius: 35px; width: 100%; max-width: 350px; text-align: center; }
-        .heart-container { position: fixed; top: 20px; right: 20px; width: 35px; height: 32px; z-index: 2000; transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        
+        .heart-container { position: fixed; top: 20px; right: 20px; width: 35px; height: 32px; z-index: 2000; transition: all 1s; }
         .h-shape { width: 100%; height: 100%; background: rgba(255,255,255,0.4); clip-path: path('M17.5 5C14 -2 0 -2 0 9C0 16 17.5 28 17.5 28C17.5 28 35 16 35 9C35 -2 21 -2 17.5 5Z'); }
         .h-fill { position: absolute; bottom: 0; width: 100%; height: 0%; background: #fff; transition: height 0.5s; }
     </style>
 </head>
 <body>
 
+<div id="transition-whiteout"></div>
 <audio id="mySong" loop playsinline><source src="https://fireofred17.github.io/VALENTINE_SPECIAL/tum-se.mp3" type="audio/mpeg"></audio>
 
 <div id="journey-root">
@@ -77,19 +97,21 @@
         <button class="btn" style="margin-top: 40px;" onclick="startMainJourney()">Open My Heart</button>
     </div>
     <div class="slide-journey" id="j2"><div id="heart-focus">❤️</div></div>
+    
     <div class="slide-journey rainbow-bg" id="j3">
         <div style="font-size: 4rem;">🌹</div><h2 style="color: white; font-family: 'Playfair Display';">Rose Day</h2>
         <p style="color: white; padding: 0 35px; font-style: italic;">"They say roses are the symbol of beauty, but looking at you, even the most perfect rose feels like a second thought."</p>
     </div>
+
     <div class="slide-journey propose-bg" id="j4">
         <div style="font-size: 4rem;">💍</div><h2 style="color: #bf77ff; font-family: 'Playfair Display';">Propose Day</h2>
-        <p style="color: white; padding: 0 35px;">"I don't just want you for a day. I want to be the person who chooses you, every single morning, for the rest of my life."</p>
+        <p style="color: white; padding: 0 35px;">"I don't just want you for a day. I want to be the person who chooses you, every single morning."</p>
     </div>
-    <div class="slide-journey choc-bg" id="j5"><div class="choc-wave"></div><div style="font-size: 4rem; z-index: 10;">🍫</div><h2 style="color: #d2691e; font-family: 'Playfair Display'; z-index: 10;">Chocolate Day</h2><p style="color: white; padding: 0 35px; z-index: 10;">"Just like chocolate, you make everything in my life taste a little bit better and a whole lot sweeter."</p></div>
-    <div class="slide-journey teddy-bg" id="j6"><div style="font-size: 4rem;">🧸</div><h2 style="color: white; font-family: 'Playfair Display';">Teddy Day</h2><p style="color: white; padding: 0 35px;">"A soft reminder that even when I'm not there, you are always safe, protected, and deeply loved by me."</p></div>
-    <div class="slide-journey promise-bg" id="j7"><div style="font-size: 4rem;">🤝</div><h2 style="color: #87ceeb; font-family: 'Playfair Display';">Promise Day</h2><p style="color: white; padding: 0 35px;">"I promise to be your safest place, your loudest cheerleader, and your forever home. No matter how much time passes, my heart stays the same."</p></div>
-    <div class="slide-journey hug-bg" id="j8"><div style="font-size: 4rem;">🫂</div><h2 style="color: white; font-family: 'Playfair Display';">Hug Day</h2><p style="color: white; padding: 0 35px;">"If I could wrap my arms around you right now, I’d never let go. Sometimes a hug is the only way for my heart to say what words cannot."</p></div>
-    <div class="slide-journey kiss-bg" id="j9"><div id="particle-container"></div><div style="font-size: 6rem; z-index: 10;">💋</div><h2 style="color: white; font-family: 'Playfair Display'; z-index: 10;">Kiss Day</h2><p style="color: white; padding: 0 35px; line-height: 1.6; z-index: 10;">"A thousand words couldn't say what one kiss can. It’s the silent language of how much you mean to me."</p></div>
+    <div class="slide-journey choc-bg" id="j5"><div class="choc-wave"></div><div style="font-size: 4rem; z-index: 10;">🍫</div><h2 style="color: #d2691e; font-family: 'Playfair Display'; z-index: 10;">Chocolate Day</h2><p style="color: white; padding: 0 35px; z-index: 10;">"You make everything in my life taste a little bit better."</p></div>
+    <div class="slide-journey teddy-bg" id="j6"><div style="font-size: 4rem;">🧸</div><h2 style="color: white; font-family: 'Playfair Display';">Teddy Day</h2><p style="color: white; padding: 0 35px;">"A reminder that you are always safe and loved by me."</p></div>
+    <div class="slide-journey promise-bg" id="j7"><div style="font-size: 4rem;">🤝</div><h2 style="color: #87ceeb; font-family: 'Playfair Display';">Promise Day</h2><p style="color: white; padding: 0 35px;">"I promise to be your safest place, always."</p></div>
+    <div class="slide-journey hug-bg" id="j8"><div style="font-size: 4rem;">🫂</div><h2 style="color: white; font-family: 'Playfair Display';">Hug Day</h2><p style="color: white; padding: 0 35px;">"Sometimes a hug says what words cannot."</p></div>
+    <div class="slide-journey kiss-bg" id="j9"><div id="particle-container"></div><div style="font-size: 6rem; z-index: 10;">💋</div><h2 style="color: white; font-family: 'Playfair Display'; z-index: 10;">Kiss Day</h2><p style="color: white; padding: 0 35px; z-index: 10;">"The silent language of how much you mean to me."</p></div>
     <div class="slide-journey" id="j10" style="background: #110104;">
         <div class="heart-loader"><div class="heart-fill-inner" id="mainFill"></div></div>
         <p id="loadingTxt" style="color: white; font-weight: bold; letter-spacing: 2px;">LOADING JOURNEY... 98%</p>
@@ -99,7 +121,7 @@
 <div id="final-valentine-root">
     <div class="bg-layer" id="petalContainer"></div>
     <div class="heart-container" id="heartUI"><div class="h-shape"><div class="h-fill" id="fill"></div></div></div>
-
+    
     <div class="slide active">
         <h1 style="font-family:'Playfair Display'; font-size: 3.5rem; color: white;">Hii Manuu...</h1>
         <div id="timer" style="font-family:'Playfair Display'; font-size: 1.3rem; margin-top: 15px; color: white;"></div>
@@ -118,37 +140,21 @@
 
     <div class="slide">
         <div style="display:flex; flex-direction:column; gap:20px;">
-            <div class="polaroid-big" style="--r:-3deg;"><img src="photo-1.jpg" style="width:100%; height:180px; object-fit:cover;"><p style="font-family:'Playfair Display'; margin-top:10px;">"In your light, I learn how to love."</p></div>
-            <div class="polaroid-big" style="--r:3deg;"><img src="photo-2.jpg" style="width:100%; height:180px; object-fit:cover;"><p style="font-family:'Playfair Display'; margin-top:10px;">"You are my favorite thought."</p></div>
+            <div class="polaroid-big" style="--r:-3deg;"><img src="photo-1.jpg" style="width:100%; height:160px; object-fit:cover;"><p style="font-family:'Playfair Display'; margin-top:5px; font-size:0.9rem;">"In your light, I learn how to love."</p></div>
+            <div class="polaroid-big" style="--r:3deg;"><img src="photo-2.jpg" style="width:100%; height:160px; object-fit:cover;"><p style="font-family:'Playfair Display'; margin-top:5px; font-size:0.9rem;">"You are my favorite thought."</p></div>
         </div>
     </div>
 
     <div class="slide">
-        <div style="background: white; padding: 45px 35px; border-radius: 40px; cursor: pointer; max-width: 320px; box-shadow: 0 20px 40px rgba(0,0,0,0.1);" onclick="pop('The 26 March Letter 💌', 'Hi, I\'m leaving Kota today and will be back on March 30th. Unfortunately, that means I\'ll miss the rest of our board classes. I\'m really sorry I didn\'t get a chance to talk to you earlier - I was too shy, but I wanted to. Now that everything is coming to an end, I wanted to reach out and say that this month has been really special for me, especially our chemistry classes. I\'ll always remember the gol gappe wala Rampal and your friend\'s hostel on the way to my house. Thanks for giving me so many amazing memories! Bye for now! \n\n (You can ignore this, but my Instagram handle is @SPIDEY_K, if you ever want to chat)')">
+        <div style="background: white; padding: 45px 35px; border-radius: 40px; cursor: pointer; max-width: 320px;" onclick="pop('The 26 March Letter 💌', 'Hi, I\'m leaving Kota today... this month has been really special for me, especially our chemistry classes. Thanks for giving me so many amazing memories!')">
             <span style="font-size: 4rem;">✉️</span>
             <p style="font-weight: 600; margin-top: 15px; color: var(--red);">The 26 March Letter</p>
         </div>
     </div>
 
     <div class="slide">
-        <div class="card-grid">
-            <div class="card" onclick="pop('Our Rhythm','Efforts are still the same! we never change and always love each other the most.. no ego🫂📈')">❣️<br>Our Rhythm</div>
-            <div class="card" onclick="pop('Small Things','Teasing each other without getting annoyed😌 these are small things which keep us together😁')">🤔<br>Small Things</div>
-            <div class="card" onclick="pop('My Belief','I believe in You. I believe that u will always be with me and will always love me🫂')">👽<br>My Belief</div>
-            <div class="card" onclick="pop('Thanks','Thanks to the universe for bringing us together! Biggest thanks to u who stayed with me😶‍🙏')">🤝🙏<br>The Spark</div>
-        </div>
-    </div>
-
-    <div class="slide">
-        <div style="display:flex; flex-direction:column; gap:20px;">
-            <div class="polaroid-big" style="--r:-2deg;"><img src="photo-3.jpg" style="width:100%; height:180px; object-fit:cover;"><p style="font-family:'Playfair Display'; margin-top:10px;">"Home is wherever I am with you."</p></div>
-            <div class="polaroid-big" style="--r:2deg;"><img src="photo-4.jpg" style="width:100%; height:180px; object-fit:cover;"><p style="font-family:'Playfair Display'; margin-top:10px;">"My heart will always be yours."</p></div>
-        </div>
-    </div>
-
-    <div class="slide">
         <h2 style="font-family:'Playfair Display'; margin-bottom: 20px; color: white;">I Love Your... 🤔</h2>
-        <div class="bubble-container" id="bubbleGame" style="width:100%; height:350px; position:relative;"></div>
+        <div id="bubbleGame" style="width:100%; height:350px; position:relative;"></div>
     </div>
 
     <div class="slide" id="questionSlide">
@@ -160,108 +166,91 @@
     </div>
 
     <div id="final-screen">
-        <div class="big-glow-heart" style="top:10%; left:10%; font-size: 70px;">❤️</div>
-        <div class="big-glow-heart" style="bottom:15%; right:5%; font-size: 100px; animation-delay: 2s;">❤️</div>
-        <div class="big-glow-heart" style="top:40%; right:15%; font-size: 50px; animation-delay: 4s;">❤️</div>
-        <img src="best.jpg" style="width: 200px; height: 200px; border-radius: 50%; border: 6px solid #fff; object-fit: cover; margin-bottom: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); z-index: 10;">
-        <h1 style="font-family:'Playfair Display'; font-size: 3.5rem; color: #fff; z-index: 10;">I LOVE YOU</h1>
-        <div class="glass-msg">
-            manuuuuuu 😋🤩😍🩷🩷🤝🏻🩷🤩😋🥳🙈🙈😮‍💨🫂🥺🤍😘👽🤍😍😈🥰😋🫠😼😘🥰😍🤩🥳😋🫠😙😗😎😈😼😻🫶🏻😗🫶🏻😙😻😘😻😘🥰🥰😋😼😘😎😘😎😎😋😼🤩😎😋😎🫠😎🥳😼😼🥳😼😻🫶🏻😻🫶🏻😻😍😻😙😻🥰🥳😼😘🫶🏻😋🫶🏻🤩😈😋😻🥳😍😻😍😈🥰🥳😼🫠🫶🏻😋🫶🏻😋😍🤩😍😻😼😈😼🤍🩷🩵🩵😈🩷🥰🫠😻🩷😍🥰😎🤍😋🩷🤩🤍😎🫠😎🩷😙🤍😻🤍🤩😼😍🫠😘🩵😈🩷🤩😘🤩🥰🤩🥰🤩🫠😻😋😈😗😻😻😈🤩🥰🥳🥰🥳
-        </div>
-        <p style="margin-top: 20px; color: white; font-weight: 600; letter-spacing: 2px; z-index: 10;">🩵🤍🩷</p>
+        <img src="best.jpg" style="width: 180px; height: 180px; border-radius: 50%; border: 6px solid #fff; object-fit: cover; margin-bottom: 20px; z-index: 10;">
+        <h1 style="font-family:'Playfair Display'; font-size: 3rem; color: #fff; z-index: 10;">I LOVE YOU</h1>
+        <div class="glass-msg">manuuuuuu 😋🤩😍🩷🩷🤝🏻🩷🤩😋🥳🙈🙈😮‍💨🫂🥺🤍😘👽🤍😍😈🥰😋🫠... (Your emoji string here)</div>
     </div>
 
-    <div id="navbar" style="position:fixed; bottom:40px; display:none; gap:60px; z-index:500;">
-        <button class="btn" onclick="move(-1)" style="padding:10px 25px;">Back</button>
-        <button class="btn" onclick="move(1)" style="padding:10px 25px;">Next</button>
-    </div>
-
+    <div id="navbar" style="position:fixed; bottom:40px; display:none; gap:60px; z-index:500;"><button class="btn" onclick="move(-1)" style="padding:10px 25px;">Back</button><button class="btn" onclick="move(1)" style="padding:10px 25px;">Next</button></div>
     <div class="overlay" id="ov" onclick="this.style.display='none'"><div class="popup" onclick="event.stopPropagation()"><h3 id="p-tit"></h3><p id="p-txt"></p></div></div>
 </div>
 
 <script>
-    /* JOURNEY LOGIC */
     const song = document.getElementById('mySong');
+    
+    // Part 1 Logic
     function createKisses() {
         const container = document.getElementById('particle-container');
-        const icons = ['💋', '❤️', '💖', '😘'];
+        const icons = ['💋', '❤️', '😘'];
         for (let i = 0; i < 20; i++) {
-            const p = document.createElement('div');
-            p.className = 'kiss-particle';
+            const p = document.createElement('div'); p.className = 'kiss-particle';
             p.innerText = icons[Math.floor(Math.random() * icons.length)];
-            p.style.left = Math.random() * 100 + 'vw';
-            p.style.animationDelay = Math.random() * 5 + 's';
-            p.style.fontSize = (Math.random() * 1.5 + 1) + 'rem';
+            p.style.left = Math.random() * 100 + 'vw'; p.style.animationDelay = Math.random() * 5 + 's';
             container.appendChild(p);
         }
     }
 
     function startMainJourney() {
-        song.play();
-        createKisses();
-        showJSlide('j1', 'j2');
+        song.play(); createKisses(); showJSlide('j1', 'j2');
         setTimeout(() => document.getElementById('heart-focus').classList.add('zoom-heart'), 800);
         setTimeout(() => showJSlide('j2', 'j3'), 3000); 
-        setTimeout(() => showJSlide('j3', 'j4'), 5500); 
-        setTimeout(() => showJSlide('j4', 'j5'), 8000); 
-        setTimeout(() => showJSlide('j5', 'j6'), 10500); 
-        setTimeout(() => showJSlide('j6', 'j7'), 13000); 
-        setTimeout(() => showJSlide('j7', 'j8'), 15500); 
-        setTimeout(() => showJSlide('j8', 'j9'), 18000); 
+        setTimeout(() => showJSlide('j3', 'j4'), 6000); 
+        setTimeout(() => showJSlide('j4', 'j5'), 9000); 
+        setTimeout(() => showJSlide('j5', 'j6'), 12000); 
+        setTimeout(() => showJSlide('j6', 'j7'), 15000); 
+        setTimeout(() => showJSlide('j7', 'j8'), 18000); 
+        setTimeout(() => showJSlide('j8', 'j9'), 21000); 
         setTimeout(() => {
             showJSlide('j9', 'j10');
             setTimeout(() => {
-                document.getElementById('mainFill').style.height = "98%"; 
+                document.getElementById('mainFill').style.height = "100%"; 
                 setTimeout(() => { 
-                    document.getElementById('loadingTxt').innerText = "100% COMPLETE!";
-                    setTimeout(launchValentine, 1500);
+                    document.getElementById('loadingTxt').innerText = "100% ARRIVED!";
+                    setTimeout(triggerSmoothTransition, 1000);
                 }, 4000); 
             }, 800);
-        }, 25000); 
+        }, 24000); 
     }
 
     function showJSlide(c, n) { document.getElementById(c).classList.remove('active'); document.getElementById(n).classList.add('active'); }
 
-    function launchValentine() {
-        document.getElementById('journey-root').style.display = 'none';
-        document.getElementById('final-valentine-root').style.display = 'block';
-        createPetals();
-        updateTimer();
+    function triggerSmoothTransition() {
+        const whiteout = document.getElementById('transition-whiteout');
+        whiteout.style.opacity = '1';
+        setTimeout(() => {
+            document.getElementById('journey-root').style.display = 'none';
+            document.getElementById('final-valentine-root').style.display = 'block';
+            whiteout.style.opacity = '0';
+            createPetals(); updateTimer();
+        }, 1200);
     }
 
-    /* YOUR ORIGINAL CODE LOGIC (UNCHANGED) */
+    // Part 2 Logic
     let idx = 0;
     const slides = document.querySelectorAll('.slide');
     const fill = document.getElementById('fill');
 
     function startJourney() { move(1); }
     function move(dir) {
-        slides[idx].classList.remove('active');
-        idx += dir;
-        slides[idx].classList.add('active');
-        document.getElementById('navbar').style.display = (idx > 0 && idx < 7) ? 'flex' : 'none';
-        fill.style.height = (idx / 7 * 100) + '%';
-        if(idx === 6) initBubbles(); 
+        slides[idx].classList.remove('active'); idx += dir; slides[idx].classList.add('active');
+        document.getElementById('navbar').style.display = (idx > 0 && idx < 5) ? 'flex' : 'none';
+        fill.style.height = (idx / 5 * 100) + '%';
+        if(idx === 4) initBubbles();
     }
+
     function pop(tit, txt) { document.getElementById('p-tit').innerText = tit; document.getElementById('p-txt').innerText = txt; document.getElementById('ov').style.display='flex'; }
-    function dodge() { const b = document.getElementById('no'); b.style.position = 'fixed'; b.style.left = Math.random()*70+15+'%'; b.style.top = Math.random()*70+15+'%'; }
+    
     function initBubbles() {
         const con = document.getElementById('bubbleGame'); con.innerHTML = '';
-        const reas = [{t:'Eyes', e:'👀'}, {t:'Smile', e:'😊'}, {t:'Laugh', e:'😂'}, {t:'Vibe', e:'✨'}, {t:'Soul', e:'🤍'}, {t:'Care', e:'🫂'}];
+        const reas = [{t:'Eyes', e:'👀'}, {t:'Smile', e:'😊'}, {t:'Laugh', e:'😂'}, {t:'Vibe', e:'✨'}, {t:'Soul', e:'🤍'}];
         reas.forEach((r) => {
             const b = document.createElement('div'); b.className = 'bubble-item'; b.innerText = r.t;
             b.style.left = Math.random()*70+10 + '%'; b.style.top = Math.random()*70+10 + '%';
-            b.onclick = (e) => {
-                const emo = document.createElement('div');
-                emo.style.position = 'fixed'; emo.style.left = e.clientX + 'px'; emo.style.top = e.clientY + 'px';
-                emo.style.fontSize = '3.5rem'; emo.innerText = r.e; document.body.appendChild(emo);
-                emo.animate([{opacity: 1, transform: 'translateY(0)'}, {opacity: 0, transform: 'translateY(-150px) scale(2)'}], 1000);
-                b.remove();
-                setTimeout(() => { emo.remove(); if(!document.querySelector('.bubble-item')) pop('Every Single Part! ❤️', 'I love everything about you.'); }, 1000);
-            };
+            b.onclick = () => { b.remove(); if(!document.querySelector('.bubble-item')) pop('Every Single Part! ❤️', 'I love everything about you.'); };
             con.appendChild(b);
         });
     }
+
     function finalSequence() {
         document.getElementById('navbar').style.display = 'none';
         const hUI = document.getElementById('heartUI');
@@ -274,20 +263,22 @@
             }, 500);
         }, 1500);
     }
+
+    function dodge() { const b = document.getElementById('no'); b.style.position = 'fixed'; b.style.left = Math.random()*70+15+'%'; b.style.top = Math.random()*70+15+'%'; }
+
     function createPetals() {
         const con = document.getElementById('petalContainer');
         for (let i = 0; i < 20; i++) {
             const p = document.createElement('div'); p.className = 'petal';
-            p.style.width = '15px'; p.style.height = '15px';
             p.style.left = Math.random()*100+'vw'; p.style.animationDuration = (Math.random()*5+5)+'s';
             con.appendChild(p);
         }
     }
+
     function updateTimer() {
-        const diff = new Date('February 23, 2026') - new Date();
+        const diff = new Date('February 14, 2026') - new Date();
         const d = Math.floor(diff/(1000*60*60*24)), h = Math.floor((diff/(1000*60*60))%24), m = Math.floor((diff/1000/60)%60), s = Math.floor((diff/1000)%60);
-        const tDiv = document.getElementById('timer');
-        if(tDiv) tDiv.innerText = `${d}d ${h}h ${m}m ${s}s`;
+        const tDiv = document.getElementById('timer'); if(tDiv) tDiv.innerText = `${d}d ${h}h ${m}m ${s}s`;
     }
     setInterval(updateTimer, 1000);
 </script>
