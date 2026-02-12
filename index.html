@@ -23,7 +23,6 @@
         }
         .slide-journey.active { opacity: 1; visibility: visible; }
 
-        /* Personalized Rainbow Style */
         .rainbow-bg { 
             background: linear-gradient(45deg, #ff5f6d, #ffc371, #ff5f6d); 
             background-size: 400% 400%; 
@@ -60,7 +59,7 @@
 
         /* --- PART 2: FINAL VALENTINE SECTION --- */
         #final-valentine-root { display: none; height: 100vh; width: 100vw; background: linear-gradient(180deg, #ff4d6d 0%, #ff85a1 40%, #fff0f3 100%); color: var(--text); overflow: hidden; }
-        .petal { position: absolute; background: rgba(255, 255, 255, 0.8); border-radius: 150% 0 150% 0; animation: fall 10s linear infinite; }
+        .petal { position: absolute; background: rgba(255, 255, 255, 0.8); border-radius: 150% 0 150% 0; animation: fall 10s linear infinite; pointer-events: none; }
         @keyframes fall { 0% { top: -10%; transform: translateX(0) rotate(0deg); opacity: 0; } 10% { opacity: 1; } 100% { top: 110%; transform: translateX(100px) rotate(360deg); opacity: 0; } }
         
         .slide { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 25px; text-align: center; opacity: 0; visibility: hidden; transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); transform: scale(0.9); }
@@ -71,16 +70,16 @@
         .card:active { transform: scale(0.9); }
         
         .polaroid-big { background: #fff; padding: 12px 12px 35px 12px; width: 220px; box-shadow: 0 20px 50px rgba(0,0,0,0.1); transform: rotate(var(--r)); margin-bottom: 10px; }
-        .btn { padding: 18px 40px; border-radius: 50px; border: none; font-weight: 600; background: white; color: var(--red); cursor:pointer; box-shadow: 0 10px 25px rgba(0,0,0,0.1); transition: 0.3s; }
+        .btn { padding: 18px 40px; border-radius: 50px; border: none; font-weight: 600; background: white; color: var(--red); cursor:pointer; box-shadow: 0 10px 25px rgba(0,0,0,0.1); transition: 0.3s; z-index: 1000; }
         
         .bubble-item { position: absolute; background: rgba(255,255,255,0.8); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 90px; height: 90px; cursor: pointer; border: 1px solid #fff; animation: floatB 4s infinite alternate ease-in-out; font-size: 0.8rem; font-weight: 600; }
         @keyframes floatB { from { transform: translate(0,0); } to { transform: translate(10px, -20px); } }
 
         #final-screen { position: fixed; inset: 0; display: none; flex-direction: column; align-items: center; justify-content: center; z-index: 8000; background: radial-gradient(circle at center, #ff85a1 0%, #ff4d6d 100%); opacity: 0; transition: opacity 1.5s ease; overflow: hidden; }
-        .glass-msg { background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.4); border-radius: 30px; padding: 25px; width: 85%; max-height: 200px; overflow-y: auto; color: white; z-index: 10; line-height: 1.6; }
+        .glass-msg { background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.4); border-radius: 30px; padding: 25px; width: 85%; max-height: 200px; overflow-y: auto; color: white; z-index: 10; line-height: 1.4; word-wrap: break-word; }
         
-        .overlay { position: fixed; inset: 0; background: rgba(89, 13, 34, 0.85); backdrop-filter: blur(15px); display: none; align-items: center; justify-content: center; z-index: 6000; padding: 30px; }
-        .popup { background: #fff; color: var(--text); padding: 35px; border-radius: 35px; width: 100%; max-width: 350px; text-align: center; overflow-y: auto; max-height: 80vh; }
+        .overlay { position: fixed; inset: 0; background: rgba(89, 13, 34, 0.85); backdrop-filter: blur(15px); display: none; align-items: center; justify-content: center; z-index: 9000; padding: 30px; }
+        .popup { background: #fff; color: var(--text); padding: 35px; border-radius: 35px; width: 100%; max-width: 350px; text-align: center; }
         
         .heart-container { position: fixed; top: 20px; right: 20px; width: 35px; height: 32px; z-index: 2000; transition: all 1s; }
         .h-shape { width: 100%; height: 100%; background: rgba(255,255,255,0.4); clip-path: path('M17.5 5C14 -2 0 -2 0 9C0 16 17.5 28 17.5 28C17.5 28 35 16 35 9C35 -2 21 -2 17.5 5Z'); }
@@ -108,10 +107,10 @@
         <div style="font-size: 4rem;">💍</div><h2 style="color: #bf77ff; font-family: 'Playfair Display';">Propose Day</h2>
         <p style="color: white; padding: 0 35px;">"I don't just want you for a day. I want to be the person who chooses you, every single morning."</p>
     </div>
-    <div class="slide-journey choc-bg" id="j5"><div class="choc-wave"></div><div style="font-size: 4rem; z-index: 10;">🍫</div><h2 style="color: #d2691e; font-family: 'Playfair Display'; z-index: 10;">Chocolate Day</h2><p style="color: white; padding: 0 35px; z-index: 10;">"Just like chocolate, you make everything in my life taste a little bit better and a whole lot sweeter."</p></div>
-    <div class="slide-journey teddy-bg" id="j6"><div style="font-size: 4rem;">🧸</div><h2 style="color: white; font-family: 'Playfair Display';">Teddy Day</h2><p style="color: white; padding: 0 35px;">"A soft reminder that even when I'm not there, you are always safe, protected, and deeply loved by me."</p></div>
-    <div class="slide-journey promise-bg" id="j7"><div style="font-size: 4rem;">🤝</div><h2 style="color: #87ceeb; font-family: 'Playfair Display';">Promise Day</h2><p style="color: white; padding: 0 35px;">"I promise to be your safest place, your loudest cheerleader, and your forever home."</p></div>
-    <div class="slide-journey hug-bg" id="j8"><div style="font-size: 4rem;">🫂</div><h2 style="color: white; font-family: 'Playfair Display';">Hug Day</h2><p style="color: white; padding: 0 35px;">"If I could wrap my arms around you right now, I’d never let go."</p></div>
+    <div class="slide-journey choc-bg" id="j5"><div class="choc-wave"></div><div style="font-size: 4rem; z-index: 10;">🍫</div><h2 style="color: #d2691e; font-family: 'Playfair Display'; z-index: 10;">Chocolate Day</h2><p style="color: white; padding: 0 35px; z-index: 10;">"You make everything in my life taste a little bit better."</p></div>
+    <div class="slide-journey teddy-bg" id="j6"><div style="font-size: 4rem;">🧸</div><h2 style="color: white; font-family: 'Playfair Display';">Teddy Day</h2><p style="color: white; padding: 0 35px;">"A reminder that you are always safe and loved by me."</p></div>
+    <div class="slide-journey promise-bg" id="j7"><div style="font-size: 4rem;">🤝</div><h2 style="color: #87ceeb; font-family: 'Playfair Display';">Promise Day</h2><p style="color: white; padding: 0 35px;">"I promise to be your safest place, always."</p></div>
+    <div class="slide-journey hug-bg" id="j8"><div style="font-size: 4rem;">🫂</div><h2 style="color: white; font-family: 'Playfair Display';">Hug Day</h2><p style="color: white; padding: 0 35px;">"Sometimes a hug says what words cannot."</p></div>
     <div class="slide-journey kiss-bg" id="j9"><div id="particle-container"></div><div style="font-size: 6rem; z-index: 10;">💋</div><h2 style="color: white; font-family: 'Playfair Display'; z-index: 10;">Kiss Day</h2><p style="color: white; padding: 0 35px; z-index: 10;">"The silent language of how much you mean to me."</p></div>
     <div class="slide-journey" id="j10" style="background: #110104;">
         <div class="heart-loader"><div class="heart-fill-inner" id="mainFill"></div></div>
@@ -120,7 +119,7 @@
 </div>
 
 <div id="final-valentine-root">
-    <div class="bg-layer" id="petalContainer"></div>
+    <div id="petalContainer"></div>
     <div class="heart-container" id="heartUI"><div class="h-shape"><div class="h-fill" id="fill"></div></div></div>
     
     <div class="slide active">
@@ -168,17 +167,25 @@
     <div id="final-screen">
         <img src="best.jpg" style="width: 180px; height: 180px; border-radius: 50%; border: 6px solid #fff; object-fit: cover; margin-bottom: 20px; z-index: 10;">
         <h1 style="font-family:'Playfair Display'; font-size: 3rem; color: #fff; z-index: 10;">I LOVE YOU</h1>
-        <div class="glass-msg">manuuuuuu 😋🤩😍🩷🩷🤝🏻🩷🤩😋🥳🙈🙈😮‍💨🫂🥺🤍😘👽🤍😍😈🥰😋🫠😼😘🥰😍🤩🥳😋🫠😙😗😎😈😼😻🫶🏻😗🫶🏻😙😻😘😻😘🥰🥰😋😼😘😎😘😎😎😋😼🤩😎😋😎🫠😎🥳😼😼🥳😼😻🫶🏻😻🫶🏻😻😍😻😙😻🥰🥳😼😘🫶🏻😋🫶🏻🤩😈😋😻🥳😍😻😍😈🥰🥳😼🫠🫶🏻😋🫶🏻😋😍🤩😍😻😼😈😼🤍🩷🩵🩵😈🩷🥰🫠😻🩷😍🥰😎🤍😋🩷🤩🤍😎🫠😎🩷😙🤍😻🤍🤩😼😍🫠😘🩵😈🩷🤩😘🤩🥰🤩🥰🤩🫠😻😋😈😗😻😻😈🤩🥰🥳🥰🥳</div>
+        <div class="glass-msg">manuuuuuu 😋🤩😍🩷🤝🏻🩷🤩😋🥳🙈😮‍💨🫂🥺🤍😘👽🤍😍😈🥰😋🫠😼😘🥰😍🤩🥳😋🫠😙😗😎😈😼😻🫶🏻😗🫶🏻😙😻😘😻😘🥰🥰😋😼😘😎😘😎😎😋😼🤩😎😋😎🫠😎🥳😼😼🥳😼😻🫶🏻😻🫶🏻😻😍😻😙😻🥰🥳😼😘🫶🏻😋🫶🏻🤩😈😋😻🥳😍😻😍😈🥰🥳😼🫠🫶🏻😋🫶🏻😋😍🤩😍😻😼😈😼🤍🩷🩵🩵😈🩷🥰🫠😻🩷😍🥰😎🤍😋🩷🤩🤍😎🫠😎🩷😙🤍😻🤍🤩😼😍🫠😘🩵😈🩷🤩😘🤩🥰🤩🥰🤩🫠😻😋😈😗😻😻😈🤩🥰🥳🥰🥳</div>
     </div>
 
-    <div id="navbar" style="position:fixed; bottom:40px; display:none; gap:60px; z-index:500;"><button class="btn" onclick="move(-1)" style="padding:10px 25px;">Back</button><button class="btn" onclick="move(1)" style="padding:10px 25px;">Next</button></div>
-    <div class="overlay" id="ov" onclick="this.style.display='none'"><div class="popup" onclick="event.stopPropagation()"><h3 id="p-tit"></h3><p id="p-txt" style="white-space: pre-line;"> </p></div></div>
+    <div id="navbar" style="position:fixed; bottom:40px; left:0; right:0; display:none; justify-content:center; gap:60px; z-index:5000;">
+        <button class="btn" onclick="move(-1)" style="padding:10px 25px;">Back</button>
+        <button class="btn" onclick="move(1)" style="padding:10px 25px;">Next</button>
+    </div>
+    
+    <div class="overlay" id="ov" onclick="this.style.display='none'"><div class="popup" onclick="event.stopPropagation()"><h3 id="p-tit"></h3><p id="p-txt" style="margin-top:15px;"></p></div></div>
 </div>
 
 <script>
     const song = document.getElementById('mySong');
-    
-    function createKisses() {
+    let idx = 0;
+    const slides = document.querySelectorAll('.slide');
+    const fill = document.getElementById('fill');
+
+    function startMainJourney() {
+        song.play(); 
         const container = document.getElementById('particle-container');
         const icons = ['💋', '❤️', '😘'];
         for (let i = 0; i < 20; i++) {
@@ -187,10 +194,7 @@
             p.style.left = Math.random() * 100 + 'vw'; p.style.animationDelay = Math.random() * 5 + 's';
             container.appendChild(p);
         }
-    }
-
-    function startMainJourney() {
-        song.play(); createKisses(); showJSlide('j1', 'j2');
+        showJSlide('j1', 'j2');
         setTimeout(() => document.getElementById('heart-focus').classList.add('zoom-heart'), 800);
         setTimeout(() => showJSlide('j2', 'j3'), 3000); 
         setTimeout(() => showJSlide('j3', 'j4'), 6000); 
@@ -224,16 +228,27 @@
         }, 1200);
     }
 
-    let idx = 0;
-    const slides = document.querySelectorAll('.slide');
-    const fill = document.getElementById('fill');
+    function startJourney() { 
+        move(1); 
+    }
 
-    function startJourney() { move(1); }
     function move(dir) {
-        slides[idx].classList.remove('active'); idx += dir; slides[idx].classList.add('active');
-        document.getElementById('navbar').style.display = (idx > 0 && idx < 5) ? 'flex' : 'none';
-        fill.style.height = (idx / 5 * 100) + '%';
-        if(idx === 4) initBubbles();
+        if (idx + dir >= 0 && idx + dir < slides.length) {
+            slides[idx].classList.remove('active');
+            idx += dir;
+            slides[idx].classList.add('active');
+            
+            // Show navbar only after the greeting slide and before the final screen
+            const nav = document.getElementById('navbar');
+            if (idx > 0 && idx < slides.length - 1) {
+                nav.style.display = 'flex';
+            } else {
+                nav.style.display = 'none';
+            }
+            
+            fill.style.height = (idx / (slides.length - 1) * 100) + '%';
+            if(idx === 4) initBubbles();
+        }
     }
 
     function pop(tit, txt) { 
