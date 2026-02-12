@@ -258,16 +258,22 @@
             {t:'Aura', e:'👑'}
         ];
         reas.forEach((r) => {
-            const b = document.createElement('div'); b.className = 'bubble-item'; 
-            b.innerHTML = `<span>${r.e}</span><br><span>${r.t}</span>`;
+            const b = document.createElement('div'); 
+            b.className = 'bubble-item'; 
+            // We put everything inside the innerHTML and make the bubble clickable
+            b.innerHTML = `${r.e}<br>${r.t}`;
             b.style.left = Math.random()*70+5 + '%'; 
             b.style.top = Math.random()*70+5 + '%';
-            b.onclick = (e) => { 
-                e.stopPropagation();
-                b.style.transform = "scale(0)";
+            
+            // This is the fix: Ensure the click pops the bubble
+            b.onclick = function() {
+                this.style.transform = "scale(0)";
+                this.style.transition = "0.3s";
                 setTimeout(() => {
-                    b.remove(); 
-                    if(!document.querySelector('.bubble-item')) pop('Every Single Part! ❤️', 'I love everything about you.'); 
+                    this.remove(); 
+                    if(!document.querySelector('.bubble-item')) {
+                        pop('Every Single Part! ❤️', 'I love everything about you.');
+                    }
                 }, 300);
             };
             con.appendChild(b);
