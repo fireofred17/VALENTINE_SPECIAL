@@ -23,6 +23,7 @@
         }
         .slide-journey.active { opacity: 1; visibility: visible; }
 
+        /* Personalized Rainbow Style */
         .rainbow-bg { 
             background: linear-gradient(45deg, #ff5f6d, #ffc371, #ff5f6d); 
             background-size: 400% 400%; 
@@ -76,10 +77,10 @@
         @keyframes floatB { from { transform: translate(0,0); } to { transform: translate(10px, -20px); } }
 
         #final-screen { position: fixed; inset: 0; display: none; flex-direction: column; align-items: center; justify-content: center; z-index: 8000; background: radial-gradient(circle at center, #ff85a1 0%, #ff4d6d 100%); opacity: 0; transition: opacity 1.5s ease; overflow: hidden; }
-        .glass-msg { background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.4); border-radius: 30px; padding: 25px; width: 85%; max-height: 200px; overflow-y: auto; color: white; z-index: 10; }
+        .glass-msg { background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.4); border-radius: 30px; padding: 25px; width: 85%; max-height: 200px; overflow-y: auto; color: white; z-index: 10; line-height: 1.6; }
         
         .overlay { position: fixed; inset: 0; background: rgba(89, 13, 34, 0.85); backdrop-filter: blur(15px); display: none; align-items: center; justify-content: center; z-index: 6000; padding: 30px; }
-        .popup { background: #fff; color: var(--text); padding: 35px; border-radius: 35px; width: 100%; max-width: 350px; text-align: center; }
+        .popup { background: #fff; color: var(--text); padding: 35px; border-radius: 35px; width: 100%; max-width: 350px; text-align: center; overflow-y: auto; max-height: 80vh; }
         
         .heart-container { position: fixed; top: 20px; right: 20px; width: 35px; height: 32px; z-index: 2000; transition: all 1s; }
         .h-shape { width: 100%; height: 100%; background: rgba(255,255,255,0.4); clip-path: path('M17.5 5C14 -2 0 -2 0 9C0 16 17.5 28 17.5 28C17.5 28 35 16 35 9C35 -2 21 -2 17.5 5Z'); }
@@ -109,9 +110,9 @@
     </div>
     <div class="slide-journey choc-bg" id="j5"><div class="choc-wave"></div><div style="font-size: 4rem; z-index: 10;">🍫</div><h2 style="color: #d2691e; font-family: 'Playfair Display'; z-index: 10;">Chocolate Day</h2><p style="color: white; padding: 0 35px; z-index: 10;">"Just like chocolate, you make everything in my life taste a little bit better and a whole lot sweeter."</p></div>
     <div class="slide-journey teddy-bg" id="j6"><div style="font-size: 4rem;">🧸</div><h2 style="color: white; font-family: 'Playfair Display';">Teddy Day</h2><p style="color: white; padding: 0 35px;">"A soft reminder that even when I'm not there, you are always safe, protected, and deeply loved by me."</p></div>
-    <div class="slide-journey promise-bg" id="j7"><div style="font-size: 4rem;">🤝</div><h2 style="color: #87ceeb; font-family: 'Playfair Display';">Promise Day</h2><p style="color: white; padding: 0 35px;">"I promise to be your safest place, your loudest cheerleader, and your forever home. No matter how much time passes, my heart stays the same."</p></div>
-    <div class="slide-journey hug-bg" id="j8"><div style="font-size: 4rem;">🫂</div><h2 style="color: white; font-family: 'Playfair Display';">Hug Day</h2><p style="color: white; padding: 0 35px;">"If I could wrap my arms around you right now, I’d never let go. Sometimes a hug is the only way for my heart to say what words cannot."</p></div>
-    <div class="slide-journey kiss-bg" id="j9"><div id="particle-container"></div><div style="font-size: 6rem; z-index: 10;">💋</div><h2 style="color: white; font-family: 'Playfair Display'; z-index: 10;">Kiss Day</h2><p style="color: white; padding: 0 35px; z-index: 10;">"A thousand words couldn't say what one kiss can. It’s the silent language of how much you mean to me."</p></div>
+    <div class="slide-journey promise-bg" id="j7"><div style="font-size: 4rem;">🤝</div><h2 style="color: #87ceeb; font-family: 'Playfair Display';">Promise Day</h2><p style="color: white; padding: 0 35px;">"I promise to be your safest place, your loudest cheerleader, and your forever home."</p></div>
+    <div class="slide-journey hug-bg" id="j8"><div style="font-size: 4rem;">🫂</div><h2 style="color: white; font-family: 'Playfair Display';">Hug Day</h2><p style="color: white; padding: 0 35px;">"If I could wrap my arms around you right now, I’d never let go."</p></div>
+    <div class="slide-journey kiss-bg" id="j9"><div id="particle-container"></div><div style="font-size: 6rem; z-index: 10;">💋</div><h2 style="color: white; font-family: 'Playfair Display'; z-index: 10;">Kiss Day</h2><p style="color: white; padding: 0 35px; z-index: 10;">"The silent language of how much you mean to me."</p></div>
     <div class="slide-journey" id="j10" style="background: #110104;">
         <div class="heart-loader"><div class="heart-fill-inner" id="mainFill"></div></div>
         <p id="loadingTxt" style="color: white; font-weight: bold; letter-spacing: 2px;">LOADING JOURNEY... 98%</p>
@@ -145,7 +146,7 @@
     </div>
 
     <div class="slide">
-        <div style="background: white; padding: 45px 35px; border-radius: 40px; cursor: pointer; max-width: 320px;" onclick="pop('The 26 March Letter 💌', 'Hi, I\'m leaving Kota today and will be back on March 30th. Unfortunately, that means I\'ll miss the rest of our board classes. I\'m really sorry I didn\'t get a chance to talk to you earlier - I was too shy, but I wanted to. Now that everything is coming to an end, I wanted to reach out and say that this month has been really special for me, especially our chemistry classes. I\'ll always remember the gol gappe wala Rampal and your friend\'s hostel on the way to my house. Thanks for giving me so many amazing memories! Bye for now! \n\n (You can ignore this, but my Instagram handle is @SPIDEY_K, if you ever want to chat)')">
+        <div style="background: white; padding: 45px 35px; border-radius: 40px; cursor: pointer; max-width: 320px;" onclick="pop('The 26 March Letter 💌', 'Hi, I\'m leaving Kota today... I wanted to reach out and say that this month has been really special for me. Thanks for giving me so many amazing memories! \n\n (Instagram: @SPIDEY_K)')">
             <span style="font-size: 4rem;">✉️</span>
             <p style="font-weight: 600; margin-top: 15px; color: var(--red);">The 26 March Letter</p>
         </div>
@@ -167,11 +168,11 @@
     <div id="final-screen">
         <img src="best.jpg" style="width: 180px; height: 180px; border-radius: 50%; border: 6px solid #fff; object-fit: cover; margin-bottom: 20px; z-index: 10;">
         <h1 style="font-family:'Playfair Display'; font-size: 3rem; color: #fff; z-index: 10;">I LOVE YOU</h1>
-        <div class="glass-msg"manuuuuuu 😋🤩😍🩷🩷🤝🏻🩷🤩😋🥳🙈🙈😮‍💨🫂🥺🤍😘👽🤍😍😈🥰😋🫠😼😘🥰😍🤩🥳😋🫠😙😗😎😈😼😻🫶🏻😗🫶🏻😙😻😘😻😘🥰🥰😋😼😘😎😘😎😎😋😼🤩😎😋😎🫠😎🥳😼😼🥳😼😻🫶🏻😻🫶🏻😻😍😻😙😻🥰🥳😼😘🫶🏻😋🫶🏻🤩😈😋😻🥳😍😻😍😈🥰🥳😼🫠🫶🏻😋🫶🏻😋😍🤩😍😻😼😈😼🤍🩷🩵🩵😈🩷🥰🫠😻🩷😍🥰😎🤍😋🩷🤩🤍😎🫠😎🩷😙🤍😻🤍🤩😼😍🫠😘🩵😈🩷🤩😘🤩🥰🤩🥰🤩🫠😻😋😈😗😻😻😈🤩🥰🥳🥰🥳</div>
+        <div class="glass-msg">manuuuuuu 😋🤩😍🩷🩷🤝🏻🩷🤩😋🥳🙈🙈😮‍💨🫂🥺🤍😘👽🤍😍😈🥰😋🫠😼😘🥰😍🤩🥳😋🫠😙😗😎😈😼😻🫶🏻😗🫶🏻😙😻😘😻😘🥰🥰😋😼😘😎😘😎😎😋😼🤩😎😋😎🫠😎🥳😼😼🥳😼😻🫶🏻😻🫶🏻😻😍😻😙😻🥰🥳😼😘🫶🏻😋🫶🏻🤩😈😋😻🥳😍😻😍😈🥰🥳😼🫠🫶🏻😋🫶🏻😋😍🤩😍😻😼😈😼🤍🩷🩵🩵😈🩷🥰🫠😻🩷😍🥰😎🤍😋🩷🤩🤍😎🫠😎🩷😙🤍😻🤍🤩😼😍🫠😘🩵😈🩷🤩😘🤩🥰🤩🥰🤩🫠😻😋😈😗😻😻😈🤩🥰🥳🥰🥳</div>
     </div>
 
     <div id="navbar" style="position:fixed; bottom:40px; display:none; gap:60px; z-index:500;"><button class="btn" onclick="move(-1)" style="padding:10px 25px;">Back</button><button class="btn" onclick="move(1)" style="padding:10px 25px;">Next</button></div>
-    <div class="overlay" id="ov" onclick="this.style.display='none'"><div class="popup" onclick="event.stopPropagation()"><h3 id="p-tit"></h3><p id="p-txt"></p></div></div>
+    <div class="overlay" id="ov" onclick="this.style.display='none'"><div class="popup" onclick="event.stopPropagation()"><h3 id="p-tit"></h3><p id="p-txt" style="white-space: pre-line;"> </p></div></div>
 </div>
 
 <script>
@@ -235,7 +236,11 @@
         if(idx === 4) initBubbles();
     }
 
-    function pop(tit, txt) { document.getElementById('p-tit').innerText = tit; document.getElementById('p-txt').innerText = txt; document.getElementById('ov').style.display='flex'; }
+    function pop(tit, txt) { 
+        document.getElementById('p-tit').innerText = tit; 
+        document.getElementById('p-txt').innerText = txt; 
+        document.getElementById('ov').style.display='flex'; 
+    }
     
     function initBubbles() {
         const con = document.getElementById('bubbleGame'); con.innerHTML = '';
@@ -244,7 +249,13 @@
             const b = document.createElement('div'); b.className = 'bubble-item'; 
             b.innerHTML = `<span>${r.e}</span><span>${r.t}</span>`;
             b.style.left = Math.random()*70+10 + '%'; b.style.top = Math.random()*70+10 + '%';
-            b.onclick = () => { b.remove(); if(!document.querySelector('.bubble-item')) pop('Every Single Part! ❤️', 'I love everything about you.'); };
+            b.onclick = () => { 
+                b.style.transform = "scale(0)";
+                setTimeout(() => {
+                    b.remove(); 
+                    if(!document.querySelector('.bubble-item')) pop('Every Single Part! ❤️', 'I love everything about you.'); 
+                }, 300);
+            };
             con.appendChild(b);
         });
     }
@@ -262,7 +273,12 @@
         }, 1500);
     }
 
-    function dodge() { const b = document.getElementById('no'); b.style.position = 'fixed'; b.style.left = Math.random()*70+15+'%'; b.style.top = Math.random()*70+15+'%'; }
+    function dodge() { 
+        const b = document.getElementById('no'); 
+        b.style.position = 'fixed'; 
+        b.style.left = Math.random()*70+15+'%'; 
+        b.style.top = Math.random()*70+15+'%'; 
+    }
 
     function createPetals() {
         const con = document.getElementById('petalContainer');
